@@ -28,12 +28,11 @@ class FileStorage():
     def reload(self):
         """Load if exists the contect of a file into the __object variable"""
         from models.base_model import BaseModel
-        #from models.user import User
-        #from models.city import City
-        #from models.amenity import Amenity
-        #from models.state import State
-        #from models.review import Review
-        #from models.place import Place
+        from models.pallet import Pallet
+        from models.ingreso import Ingreso
+        from models.salida import Salida
+        from models.factura import Factura
+
 
         if path.exists(self.__file_path):
             with open(self.__file_path, "r", encoding="utf-8") as f:
