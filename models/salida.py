@@ -1,15 +1,28 @@
 #!/usr/bin/python3
 """class Salida"""
-from models.base_model import BaseModel
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
-class Salida(BaseModel):
+class Salida(BaseModel, Base):
     """class Salida that inherits from BaseModel"""
-    placa = ""
-    contenedor = ""
-    transportadora = ""
-    observaciones = ""
-    lista_pallets = []
+
+    if models.storage_t == "db":
+        __tablename__ = 'salidas'
+        placa = Column(String(10), nullable=False)
+        lista_pallets = relationship("Pallet", backref="salidas", cascade="all, delete, delete-orphan")
+    else:
+        #pedido = ""
+        placa = ""
+        #origen = ""
+        #contenedor = ""
+        #transportadora = ""
+        #observaciones = ""
+        #lista_pallets = []
 
     def __init__(self, *args, **kwargs):
         """Funtion to create a new instance"""

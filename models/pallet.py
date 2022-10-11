@@ -1,19 +1,32 @@
 #!/usr/bin/python3
 """class Pallet"""
-from models.base_model import BaseModel
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, ForeignKey, Integer
+from sqlalchemy.orm import relationship
 
 
-class Pallet(BaseModel):
+class Pallet(BaseModel, Base):
     """class Pallet that inherits from BaseModel"""
-    producto = ""
-    proovedor = ""
-    referencia = ""
-    tipo = ""
-    peso = ""
-    estado = ""
-    ingreso_id = ""
-    salida_id = ""
-    lista_facturas = []
+
+    if models.storage_t == "db":
+        __tablename__ = 'pallets'
+        producto = Column(String(60), nullable=False)
+        peso = Column(Integer, nullable=False)
+        ingreso_id = Column(String(60), ForeignKey('ingresos.id'), nullable=False)
+        salida_id = Column(String(60), ForeignKey('salidas.id'), nullable=True)
+    else:
+        producto = ""
+        #proovedor = ""
+        #referencia = ""
+        #tipo = ""
+        peso = ""
+        #estado = ""
+        ingreso_id = ""
+        salida_id = ""
+        #lista_facturas = []
 
     def __init__(self, *args, **kwargs):
         """Funtion to create a new instance"""
