@@ -14,7 +14,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"Pallet": Pallet, "BaseModel": BaseModel, "Ingreso": Ingreso,
+classes = {"Pallet": Pallet, "Ingreso": Ingreso,
            "Salida": Salida, "Factura": Factura}
 
 class DBStorage:
@@ -51,6 +51,10 @@ class DBStorage:
     def new(self, obj):
         """add the object to the current database session"""
         self.__session.add(obj)
+    
+    def execute(self, line):
+        """execute an order"""
+        self.__session.execute(line)
 
     def save(self):
         """commit all changes of the current database session"""
