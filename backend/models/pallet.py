@@ -15,6 +15,9 @@ class Pallet(BaseModel, Base):
         __tablename__ = 'pallets'
         producto = Column(String(60), nullable=False)
         peso = Column(Integer, nullable=False)
+        referencia = Column(String(20), nullable=True)
+        referencia2 = Column(String(20), nullable=True)
+        proovedor = Column(String(20), nullable=False)
         ingreso_id = Column(String(60), ForeignKey('ingresos.id'), nullable=False)
         salida_id = Column(String(60), ForeignKey('salidas.id'), nullable=True)
     else:

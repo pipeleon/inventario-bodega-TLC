@@ -7,7 +7,9 @@ from models.salida import Salida
 from models.factura import Factura
 
 datos ={
-    'placa': 'WER185'
+    'consecutivo': 'C-001',
+    'placa': 'WER185',
+    'pedido': '22-100'
 }
 
 new_ingreso = Ingreso(**datos)
@@ -21,7 +23,8 @@ new_ingreso.save()
 
 datos2 ={
     'producto': 'rollos',
-    'peso': 60,
+    'peso': 10,
+    'proovedor': 'HENKEL',
     'ingreso_id': new_ingreso.id
 }
 

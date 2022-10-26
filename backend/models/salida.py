@@ -13,7 +13,9 @@ class Salida(BaseModel, Base):
 
     if models.storage_t == "db":
         __tablename__ = 'salidas'
+        consecutivo = Column(String(5), nullable=False)
         placa = Column(String(10), nullable=False)
+        contenedor = Column(String(10), nullable=True)
         lista_pallets = relationship("Pallet", backref="salidas", cascade="all, delete, delete-orphan")
     else:
         #pedido = ""
