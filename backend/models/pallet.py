@@ -18,6 +18,7 @@ class Pallet(BaseModel, Base):
         referencia = Column(String(20), nullable=True)
         referencia2 = Column(String(20), nullable=True)
         proovedor = Column(String(20), nullable=False)
+        cliente_id = Column(String(60), ForeignKey('clientes.id'), nullable=False)
         ingreso_id = Column(String(60), ForeignKey('ingresos.id'), nullable=False)
         salida_id = Column(String(60), ForeignKey('salidas.id'), nullable=True)
     else:

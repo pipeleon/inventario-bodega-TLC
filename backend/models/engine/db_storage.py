@@ -9,13 +9,14 @@ from models.pallet import Pallet
 from models.ingreso import Ingreso
 from models.salida import Salida
 from models.factura import Factura
+from models.cliente import Cliente
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Pallet": Pallet, "Ingreso": Ingreso,
-           "Salida": Salida, "Factura": Factura}
+           "Salida": Salida, "Factura": Factura, "Cliente": Cliente}
 
 class DBStorage:
     """interaacts with the MySQL database"""

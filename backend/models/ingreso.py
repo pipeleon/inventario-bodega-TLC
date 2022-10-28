@@ -13,7 +13,7 @@ class Ingreso(BaseModel, Base):
 
     if models.storage_t == "db":
         __tablename__ = 'ingresos'
-        consecutivo = Column(String(5), nullable=False)
+        consecutivo = Column(String(7), nullable=False)
         placa = Column(String(10), nullable=False)
         contenedor = Column(String(10), nullable=True)
         pedido = Column(String(10), nullable=False)
