@@ -6,7 +6,7 @@ const IngresosRow = ({ consecutivo, pedido, placa, contenedor, created_at }) => 
         <td>{created_at.slice(0, 10)}</td>
         <td>{pedido}</td>
         <td>{placa}</td>
-        <td>{contenedor}</td>
+        <td>{contenedor ? contenedor : 'N/A'}</td>
     </tr>
 )
 
@@ -15,7 +15,7 @@ function Ingresos() {
     const [ingresos, setIngresos] = useState([])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setIngresos(data))
+        fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setIngresos(data.sort((a,b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
     
@@ -36,15 +36,23 @@ function Ingresos() {
                     </thead>
                     <tbody>
                         {
-                            ingresos.map((ingreso, i) =>
+                            ingresos.map((ingreso) =>
                                 <IngresosRow
-                                    key={i}
+                                    key={ingreso.id}
                                     {...ingreso}
                                 />
                             )
                         }
                     </tbody>
                 </table >
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <h3>Lista de Ingresos</h3>
+                <p>No hay Ingresos Aun</p>
             </div>
         )
     }

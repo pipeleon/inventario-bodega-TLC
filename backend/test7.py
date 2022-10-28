@@ -1,29 +1,13 @@
 #!/usr/bin/python3
-"""Task 8 0x11. Python - Network #1"""
-import requests
-from flask import jsonify
+from models import storage
+from datetime import datetime
+from models.pallet import Pallet
+from models.ingreso import Ingreso
+from models.salida import Salida
+from models.factura import Factura, pallet_factura
 
+ingresos = storage.all(cls=Ingreso)
 
-parametros = {
-    'ingresos': {
-        'consecutivo': 'C-002',
-        'placa': 'LOP985',
-        'pedido': '22-101'
-    }
-}
+for i in ingresos.values():
+    print(i.lista_pallets)
 
-print(parametros.__class__)
-
-
-r1 = requests.get("http://0.0.0.0:5000/api/v1/ingresos")
-
-print(r1.json())
-
-r2 = requests.post("http://0.0.0.0:5000/api/v1/ingresos", data=parametros)
-
-
-try:
-    print(r2)
-    print(r2.json())
-except:
-    print("Not a valid JSON")
