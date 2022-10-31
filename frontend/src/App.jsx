@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import Ingresos from './components/ingresos'
 import NuevoIngreso from './components/nuevoIngreso'
+import NuevoCliente from './components/nuevoCliente'
 import Home from './components/home'
 import Nav from './Nav'
 import reactLogo from './assets/Total.png'
-import './App.css'
+
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/ingresos' element={<Ingresos />} />
         <Route path='/nuevoIngreso' element={<NuevoIngreso />} />
+        <Route path='/nuevoCliente' element={<NuevoCliente />} />
       </Routes>
     </div>
   )

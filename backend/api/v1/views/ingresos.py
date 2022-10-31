@@ -31,12 +31,14 @@ def nuevos_ingresos():
     data = request.get_json()
     datos_ingreso = data['ingreso']
     datos_pallets = data['pallets']
+    id_cliente = data['cliente']
 
     nuevo_ingreso = Ingreso(**datos_ingreso)
     nuevo_ingreso.save()
 
     for pallet in datos_pallets:
         pallet['ingreso_id'] = nuevo_ingreso.id
+        pallet['cliente_id'] = id_cliente
         nuevo_pallet = Pallet(**pallet)
         nuevo_pallet.save()
 

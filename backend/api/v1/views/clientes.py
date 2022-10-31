@@ -8,7 +8,7 @@ from flask import abort, jsonify, make_response, request
 
 
 @app_views.route('/clientes', methods=['GET'], strict_slashes=False)
-def get_ingresos():
+def get_clientes():
     """
     Devuelve todos los clientes
     """
@@ -20,7 +20,7 @@ def get_ingresos():
     return jsonify(lista_clientes)
 
 @app_views.route('/clientes', methods=['POST'], strict_slashes=False)
-def nuevos_ingresos():
+def nuevos_clientes():
     """
     Nuevo Ingreso con lista de Pallets
     """
