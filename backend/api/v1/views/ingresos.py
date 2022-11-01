@@ -15,7 +15,17 @@ def get_ingresos():
     ingresos = storage.all(Ingreso).values()
     lista_ingresos = []
     for ingreso in ingresos:
-        lista_ingresos.append(ingreso.to_dict())
+        dictionary = ingreso.to_dict()
+        dictionary['total_pallets'] = len(ingreso.lista_pallets)
+        peso_total = 0
+        if len(ingreso.lista_pallets) > 0:
+            dictionary['producto'] = ingreso.lista_pallets[0].producto
+            for pallet in ingreso.lista_pallets:
+                peso_total += pallet.peso
+        else:
+            dictionary['producto'] = 'N/A'
+        dictionary['peso_total'] = peso_total
+        lista_ingresos.append(dictionary)
     
     return jsonify(lista_ingresos)
 

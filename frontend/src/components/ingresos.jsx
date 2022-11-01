@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 
-const IngresosRow = ({ consecutivo, pedido, placa, contenedor, created_at }) => (
+const IngresosRow = ({ consecutivo, pedido, placa, contenedor, created_at, total_pallets, producto, peso_total }) => (
     <tr>
         <td>{consecutivo}</td>
         <td>{created_at.slice(0, 10)}</td>
         <td>{pedido}</td>
         <td>{placa}</td>
         <td>{contenedor ? contenedor : 'N/A'}</td>
+        <td>{total_pallets}</td>
+        <td>{producto}</td>
+        <td>{peso_total}</td>
     </tr>
 )
 
@@ -32,6 +35,9 @@ function Ingresos() {
                             <th>Pedido</th>
                             <th>Placa</th>
                             <th>Contenedor</th>
+                            <th>No. de Pallets</th>
+                            <th>Producto</th>
+                            <th>Peso total</th>
                         </tr>
                     </thead>
                     <tbody>

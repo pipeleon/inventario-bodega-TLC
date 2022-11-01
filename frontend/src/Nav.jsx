@@ -7,15 +7,19 @@ export const Nav = () => (
             Home
         </Link>
         &#9679;
+        <Link to="/inventario">
+            Inventario
+        </Link>
+        &#9679;
         <Link to="/ingresos">
             Ingresos
         </Link>
         &#9679;
-        <Link to="/nuevoIngreso">
+        <Link to="/nuevo-ingreso">
             Nuevo Ingreso
         </Link>
         &#9679;
-        <Link to="/nuevoCliente">
+        <Link to="/nuevo-cliente">
             Nuevo Cliente
         </Link>
     </nav>
