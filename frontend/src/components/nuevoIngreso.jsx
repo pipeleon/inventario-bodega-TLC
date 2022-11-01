@@ -22,31 +22,41 @@ function NuevoIngreso() {
 
 
   const [file, setFile] = useState();
+  const [array, setArray] = useState([]);
 
-    const fileReader = new FileReader();
+  const fileReader = new FileReader();
 
-    const handleOnChange = (e) => {
-        setFile(e.target.files[0])
-    };
+  const handleOnChange = (e) => {
+    setFile(e.target.files[0])
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
+    
+    console.log(file)
+    
+  };
 
-        if (file) {
-            fileReader.onload = function (event) {
-                const csvOutput = event.target.result;
-                const csvHeader = csvOutput.slice(0, csvOutput.indexOf("\n")).split(";");
-                csvHeader.map((head) => {console.log(head)})
-                const csvRows = csvOutput.slice(csvOutput.indexOf("\n") + 1).split("\n");
-                console.log(csvHeader)
-                console.log(csvRows)
-            };
+  const csvFileToArray = string => {
+    const csvHeader = string.slice(0, string.indexOf("\r")).split(";");
+    const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+    console.log(csvHeader)
+    console.log(csvRows)
 
-            fileReader.readAsText(file);
-        }
-    };
+    const array2 = csvRows.map(i => {
+      const values = i.split(";");
+      const obj = csvHeader.reduce((object, header, index) => {
+        object[header] = values[index];
+        return object;
+      }, {});
+      return obj;
+    });
 
+    console.log(array2)
+    setArray(array2.slice(0, -1))
+    console.log(array)
+  };
 
+  
+
+  
 
   const abrir = () => {
     setDropdown(!dropdown)
@@ -56,22 +66,40 @@ function NuevoIngreso() {
     fetch("http://localhost:5000/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
   }, [])
 
-  console.log(clientes)
-  console.log(cliente_id)
+  console.log(array)
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (file) {
+      fileReader.onload = function (event) {
+        const csvOutput = event.target.result;
+        csvFileToArray(csvOutput)
+
+      };
+
+      fileReader.readAsText(file);
+    }
+    
     let pallets = []
 
-    for (let i = 0; i < cantidad; i++) {
-      const newPallet = {
-        producto,
-        'peso': (pesoT / cantidad),
-        referencia,
-        proovedor
-      }
-      pallets.push(newPallet)
+    if (modo) {
+      pallets = array
     }
+    else {
+      for (let i = 0; i < cantidad; i++) {
+        const newPallet = {
+          producto,
+          'peso': (pesoT / cantidad),
+          referencia,
+          proovedor
+        }
+        pallets.push(newPallet)
+      }
+    }
+
+    if (pallets.length > 0) {
+    
 
     const data = {
       'ingreso': {
@@ -92,6 +120,7 @@ function NuevoIngreso() {
       },
       body: JSON.stringify(data)
     }).then((response) => response.json()).then((data) => console.log(data))
+  }
 
   }
 
@@ -99,7 +128,9 @@ function NuevoIngreso() {
   return (
     <div>
       <h3>Nuevo Ingreso</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={
+        handleSubmit
+      }>
         <label>No</label>
         <input onChange={(e) => setConsecutivo(e.target.value)}
           value={consecutivo} />
@@ -121,57 +152,45 @@ function NuevoIngreso() {
           value={contenedor} />
         <br></br>
         <br></br>
-        <input type="checkbox" onChange={() => setModo(!modo)}/> CSV
+        <input type="checkbox" onChange={() => setModo(!modo)} /> CSV
         <br></br>
         {modo == true &&
-          <>
-          <form>
-                <input
-                    type={"file"}
-                    id={"csvFileInput"}
-                    accept={".csv"}
-                    onChange={handleOnChange}
-                />
-
-                <button
-                    onClick={(e) => {
-                        handleOnSubmit(e);
-                    }}
-                >
-                    IMPORT CSV
-                </button>
-            </form>
-          <br></br>
-          </>
+        <>
+            <input
+              type={"file"}
+              id={"csvFileInput"}
+              accept={".csv"}
+              onChange={handleOnChange}
+            />
+            
+            </>
         }
         <br></br>
 
         <label>Producto</label>
         <input onChange={(e) => setProducto(e.target.value)}
-          value={producto} 
-          disabled={modo}/>
+          value={producto}
+          disabled={modo} />
         <br></br>
         <label>Peso Total</label>
         <input onChange={(e) => setPeso(e.target.value)}
-          value={pesoT} 
-          disabled={modo}/>
+          value={pesoT}
+          disabled={modo} />
         <br></br>
         <label>Cantidad de Pallets</label>
         <input onChange={(e) => setCantidad(e.target.value)}
-          value={cantidad} 
-          disabled={modo}/>
+          value={cantidad}
+          disabled={modo} />
         <br></br>
         <label>Referencia</label>
         <input onChange={(e) => setReferencia(e.target.value)}
-          value={referencia} 
-          disabled={modo}/>
+          value={referencia}
+          disabled={modo} />
         <br></br>
         <label>Proovedor</label>
         <input onChange={(e) => setProovedor(e.target.value)}
-          value={proovedor} 
-          disabled={modo}/>
-
-
+          value={proovedor}
+          disabled={modo} />
 
         <br></br>
         <br></br>
