@@ -5,9 +5,12 @@ import { useState, useEffect } from 'react'
 function NuevaSalida() {
     const [pallets, setPallets] = useState([])
     const [pallets_salida, setPallets2] = useState([])
-
-    console.log(pallets_salida)
+    const [consecutivo, setConsecutivo] = useState("")
+    const [placa, setPlaca] = useState("")
+    const [contenedor, setContenedor] = useState("")
     
+    console.log(pallets_salida)
+
 
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
@@ -16,6 +19,27 @@ function NuevaSalida() {
     const handleChange = (id) => {
         console.log(id)
         pallets_salida.includes(id) ? pallets_salida.splice(pallets_salida.indexOf(id), 1) && setPallets2(pallets_salida) : setPallets2([...pallets_salida, id])
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const data = {
+            'salida': {
+              consecutivo,
+              placa,
+              contenedor
+            },
+            'pallets': pallets_salida
+          }
+
+        fetch('http://localhost:5000/api/v1/salidas', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then((response) => response.json()).then((data) => console.log(data))
     }
 
 
@@ -44,7 +68,7 @@ function NuevaSalida() {
                                 !pallet.salida_id &&
                                 <tr>
                                     <td><input type="checkbox" onChange={(e) => handleChange(e.target.value)}
-                                    value={pallet.id} /></td>
+                                        value={pallet.id} /></td>
                                     <td>{pallet.id.slice(-5)}</td>
                                     <td>{pallet.producto}</td>
                                     <td>{pallet.peso}</td>
@@ -58,6 +82,25 @@ function NuevaSalida() {
                         }
                     </tbody>
                 </table >
+                <div>
+                    <form onSubmit={
+                        handleSubmit
+                    }>
+                        <label>No</label>
+                        <input onChange={(e) => setConsecutivo(e.target.value)}
+                            value={consecutivo} />
+                        <br></br>
+                        <label>Placa</label>
+                        <input onChange={(e) => setPlaca(e.target.value)}
+                            value={placa} />
+                        <br></br>
+                        <label>Contenedor</label>
+                        <input onChange={(e) => setContenedor(e.target.value)}
+                            value={contenedor} />
+
+                        <button>Guardar</button>
+                    </form>
+                </div>
             </div>
         )
     }

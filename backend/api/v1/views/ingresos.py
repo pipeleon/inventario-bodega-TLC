@@ -30,7 +30,7 @@ def get_ingresos():
     return jsonify(lista_ingresos)
 
 @app_views.route('/ingresos', methods=['POST'], strict_slashes=False)
-def nuevos_ingresos():
+def nuevo_ingresos():
     """
     Nuevo Ingreso con lista de Pallets
     """

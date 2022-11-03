@@ -11,3 +11,4 @@ from api.v1.views.index import *
 from api.v1.views.ingresos import *
 from api.v1.views.clientes import *
 from api.v1.views.pallets import *
+from api.v1.views.salidas import *

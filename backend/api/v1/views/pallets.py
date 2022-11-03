@@ -41,9 +41,7 @@ def get_pallets_simplificado():
             dictionary['producto'] = lista_pallets_activas[0].producto
             for pallet2 in lista_pallets_activas:
                 peso_total += pallet.peso
-        else:
-            dictionary['producto'] = 'N/A'
-        dictionary['peso_total'] = peso_total
-        lista_ingresos.append(dictionary)
+            dictionary['peso_total'] = peso_total
+            lista_ingresos.append(dictionary)
     
     return jsonify(lista_ingresos)

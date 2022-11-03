@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import Ingresos from './components/ingresos'
+import Salidas from './components/salidas'
 import Pallets from './components/pallets'
 import NuevoIngreso from './components/nuevoIngreso'
 import NuevaSalida from './components/nuevaSalida'
+import NuevaFactura from './components/nuevaFactura'
 import NuevoCliente from './components/nuevoCliente'
 import Home from './components/home'
 import Nav from './Nav'
@@ -28,6 +30,8 @@ function App() {
         <Route path='/nuevo-cliente' element={<NuevoCliente />} />
         <Route path='/inventario' element={<Pallets />} />
         <Route path='/nueva-salida' element={<NuevaSalida />} />
+        <Route path='/salidas' element={<Salidas />} />
+        <Route path='/nueva-factura' element={<NuevaFactura />} />
       </Routes>
     </div>
   )
