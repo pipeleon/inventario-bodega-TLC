@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 function NuevoIngreso() {
   const [consecutivo, setConsecutivo] = useState("")
@@ -106,7 +108,8 @@ function NuevoIngreso() {
         consecutivo,
         pedido,
         placa,
-        contenedor
+        contenedor,
+        created_at
       },
       pallets,
       'cliente': cliente_id
@@ -136,8 +139,7 @@ function NuevoIngreso() {
           value={consecutivo} />
         <br></br>
         <label>Fecha</label>
-        <input placeholder='AAAA/MM/DD' onChange={(e) => setCreated_at(e.target.value)}
-          value={created_at} />
+        <DatePicker selected={created_at} onChange={(date) => setCreated_at(date)} />
         <br></br>
         <label>Pedido</label>
         <input onChange={(e) => setPedido(e.target.value)}

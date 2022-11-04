@@ -4,7 +4,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Column, String, ForeignKey, Table, DateTime
+from sqlalchemy import Column, String, ForeignKey, Table, DateTime, Float
 from sqlalchemy.orm import relationship
 
 
@@ -26,7 +26,11 @@ class Factura(BaseModel, Base):
         __tablename__ = 'facturas'
         inicio = Column(DateTime, nullable=False)
         fin = Column(DateTime, nullable=False)
+        valor_cargues = Column(Float, nullable=True)
+        valor_descargues = Column(Float, nullable=True)
+        valor_almacenamiento = Column(Float, nullable=True)
         lista_pallets = relationship("Pallet", secondary=pallet_factura, viewonly=False)
+        cliente_id = Column(String(60), ForeignKey('clientes.id'), nullable=False)
     else:
         inicio = ""
         fin = ""

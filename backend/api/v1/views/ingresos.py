@@ -43,6 +43,8 @@ def nuevo_ingresos():
     datos_pallets = data['pallets']
     id_cliente = data['cliente']
 
+    datos_ingreso['created_at'] = datos_ingreso['created_at'][0:10]
+
     nuevo_ingreso = Ingreso(**datos_ingreso)
     nuevo_ingreso.save()
 

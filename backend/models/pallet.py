@@ -4,7 +4,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Column, String, ForeignKey, Integer
+from sqlalchemy import Column, String, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
 
 
@@ -14,7 +14,7 @@ class Pallet(BaseModel, Base):
     if models.storage_t == "db":
         __tablename__ = 'pallets'
         producto = Column(String(60), nullable=False)
-        peso = Column(Integer, nullable=False)
+        peso = Column(Float, nullable=False)
         referencia = Column(String(20), nullable=True)
         referencia2 = Column(String(20), nullable=True)
         proovedor = Column(String(20), nullable=False)
