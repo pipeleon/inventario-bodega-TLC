@@ -13,6 +13,7 @@ function NuevoIngreso() {
   const [contenedor, setContenedor] = useState("")
   const [producto, setProducto] = useState("")
   const [pesoT, setPeso] = useState("")
+  const [valorT, setValor] = useState("")
   const [cantidad, setCantidad] = useState("")
   const [referencia, setReferencia] = useState("")
   const [proovedor, setProovedor] = useState("")
@@ -93,6 +94,7 @@ function NuevoIngreso() {
         const newPallet = {
           producto,
           'peso': (pesoT / cantidad),
+          'valor': (valorT / cantidad),
           referencia,
           proovedor
         }
@@ -182,6 +184,11 @@ function NuevoIngreso() {
         <label>Cantidad de Pallets</label>
         <input onChange={(e) => setCantidad(e.target.value)}
           value={cantidad}
+          disabled={modo} />
+        <br></br>
+        <label>Valor Declarado</label>
+        <input onChange={(e) => setValor(e.target.value)}
+          value={valorT}
           disabled={modo} />
         <br></br>
         <label>Referencia</label>

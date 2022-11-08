@@ -4,7 +4,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Float
 from sqlalchemy.orm import relationship
 
 
@@ -17,6 +17,7 @@ class Cliente(BaseModel, Base):
         nit = Column(Integer, nullable=False)
         tarifa_cargue = Column(Integer, nullable=False)
         tarifa_almacenamiento = Column(Integer, nullable=False)
+        tasa_seguro = Column(Float, nullable=False)
         lista_pallets = relationship("Pallet", backref="clientes", cascade="all, delete, delete-orphan")
         lista_facturas = relationship("Factura", backref="clientes", cascade="all, delete, delete-orphan")
     else:

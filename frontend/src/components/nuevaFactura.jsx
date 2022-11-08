@@ -24,8 +24,7 @@ function NuevaFactura() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('200')
-
+    
     const data = {
       'factura': {
         'inicio': startDate,
@@ -33,6 +32,9 @@ function NuevaFactura() {
         cliente_id
       }
     }
+
+    console.log(startDate)
+    console.log(endDate)
 
 
     fetch('http://localhost:5000/api/v1/facturas', {

@@ -51,6 +51,7 @@ def nuevo_ingresos():
     for pallet in datos_pallets:
         pallet['ingreso_id'] = nuevo_ingreso.id
         pallet['cliente_id'] = id_cliente
+        pallet['created_at'] = datos_ingreso['created_at']
         nuevo_pallet = Pallet(**pallet)
         nuevo_pallet.save()
 

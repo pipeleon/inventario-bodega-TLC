@@ -42,6 +42,8 @@ def nueva_salidas():
     datos_salida = data['salida']
     lista_pallets = data['pallets']
 
+    datos_salida['created_at'] = datos_salida['created_at'][0:10]
+
     nueva_salida = Salida(**datos_salida)
     nueva_salida.save()
 

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 
 function NuevaSalida() {
@@ -8,7 +10,8 @@ function NuevaSalida() {
     const [consecutivo, setConsecutivo] = useState("")
     const [placa, setPlaca] = useState("")
     const [contenedor, setContenedor] = useState("")
-    
+    const [created_at, setCreated_at] = useState("")
+
     console.log(pallets_salida)
 
 
@@ -26,20 +29,21 @@ function NuevaSalida() {
 
         const data = {
             'salida': {
-              consecutivo,
-              placa,
-              contenedor
+                consecutivo,
+                placa,
+                contenedor,
+                created_at
             },
             'pallets': pallets_salida
-          }
+        }
 
         fetch('http://localhost:5000/api/v1/salidas', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-          }).then((response) => response.json()).then((data) => console.log(data))
+        }).then((response) => response.json()).then((data) => console.log(data))
     }
 
 
@@ -89,6 +93,9 @@ function NuevaSalida() {
                         <label>No</label>
                         <input onChange={(e) => setConsecutivo(e.target.value)}
                             value={consecutivo} />
+                        <br></br>
+                        <label>Fecha</label>
+                        <DatePicker selected={created_at} onChange={(date) => setCreated_at(date)} />
                         <br></br>
                         <label>Placa</label>
                         <input onChange={(e) => setPlaca(e.target.value)}

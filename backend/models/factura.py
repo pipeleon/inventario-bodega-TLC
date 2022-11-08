@@ -29,6 +29,7 @@ class Factura(BaseModel, Base):
         valor_cargues = Column(Float, nullable=True)
         valor_descargues = Column(Float, nullable=True)
         valor_almacenamiento = Column(Float, nullable=True)
+        valor_seguro = Column(Float, nullable=True)
         lista_pallets = relationship("Pallet", secondary=pallet_factura, viewonly=False)
         cliente_id = Column(String(60), ForeignKey('clientes.id'), nullable=False)
     else:
