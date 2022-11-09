@@ -1,5 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import {
+    Badge,
+    Button,
+    Card,
+    Navbar,
+    Nav,
+    Table,
+    Container,
+    Row,
+    Col,
+} from "react-bootstrap";
 
 const PalletsRow = ({ id, producto, peso, referencia, created_at, referencia2, proovedor, consecutivo, cliente }) => (
     <tr>
@@ -26,43 +37,67 @@ function Inventario() {
 
     if (pallets.length > 0) {
         return (
-            <div>
-                <h3>Inventario</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Producto</th>
-                            <th>Peso</th>
-                            <th>Referencia 1</th>
-                            <th>Referencia 2</th>
-                            <th>Proovedor</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Ingreso ID</th>
-                            <th>Cliente</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            pallets.map((pallet) =>
-                                !pallet.salida_id &&
-                                <PalletsRow
-                                    key={pallet.id}
-                                    {...pallet}
-                                />
-                            )
-                        }
-                    </tbody>
-                </table >
-            </div>
+            <>
+                <Container fluid>
+                    <Row>
+                        <Col md="12">
+                            <Card className='strpied-tabled-with-hover'>
+                                <Card.Header>
+                                    <Card.Title as="h4">Inventario</Card.Title>
+                                </Card.Header>
+                                <Card.Body className='table-full-width table-responsive px-0'>
+                                    <Table className='table-hover table-striped'>
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Producto</th>
+                                                <th>Peso</th>
+                                                <th>Referencia 1</th>
+                                                <th>Referencia 2</th>
+                                                <th>Proovedor</th>
+                                                <th>Fecha Ingreso</th>
+                                                <th>Ingreso ID</th>
+                                                <th>Cliente</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                pallets.map((pallet) =>
+                                                    !pallet.salida_id &&
+                                                    <PalletsRow
+                                                        key={pallet.id}
+                                                        {...pallet}
+                                                    />
+                                                )
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         )
     }
     else {
         return (
-            <div>
-                <h3>Inventario</h3>
-                <p>No hay Mercancia Aun</p>
-            </div>
+            <>
+                <Container fluid>
+                    <Row>
+                        <Col md="12">
+                            <Card className='strpied-tabled-with-hover'>
+                                <Card.Header>
+                                    <Card.Title as="h4">Inventario</Card.Title>
+                                    <p className="card-category">
+                                        No hay Inventario Aun
+                                    </p>
+                                </Card.Header>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         )
     }
 }
@@ -89,39 +124,63 @@ function InventarioSimp() {
 
     if (ingresos.length > 0) {
         return (
-            <div>
-                <h3>Inventario</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Peso total</th>
-                            <th>No. de Pallets</th>
-                            <th>Ingreso ID</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Cliente</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            ingresos.map((ingreso) =>
-                                <IngresosRow
-                                    key={ingreso.id}
-                                    {...ingreso}
-                                />
-                            )
-                        }
-                    </tbody>
-                </table >
-            </div>
+            <>
+                <Container fluid>
+                    <Row>
+                        <Col md="12">
+                            <Card className='strpied-tabled-with-hover'>
+                                <Card.Header>
+                                    <Card.Title as="h4">Inventario</Card.Title>
+                                </Card.Header>
+                                <Card.Body className='table-full-width table-responsive px-0'>
+                                    <Table className='table-hover table-striped'>
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Peso total</th>
+                                                <th>No. de Pallets</th>
+                                                <th>Ingreso ID</th>
+                                                <th>Fecha Ingreso</th>
+                                                <th>Cliente</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                ingresos.map((ingreso) =>
+                                                    <IngresosRow
+                                                        key={ingreso.id}
+                                                        {...ingreso}
+                                                    />
+                                                )
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         )
     }
     else {
         return (
-            <div>
-                <h3>Inventario</h3>
-                <p>No hay Inventario Aun</p>
-            </div>
+            <>
+            <Container fluid>
+                <Row>
+                    <Col md="12">
+                        <Card className='strpied-tabled-with-hover'>
+                            <Card.Header>
+                                <Card.Title as="h4">Inventario</Card.Title>
+                                <p className="card-category">
+                                    No hay Inventario Aun
+                                </p>
+                            </Card.Header>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </>
         )
     }
 }

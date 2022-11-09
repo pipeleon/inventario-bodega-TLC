@@ -38,6 +38,10 @@ export const Nav = () => (
         <Link to="/nuevo-cliente">
             Nuevo Cliente
         </Link>
+        &#9679;
+        <Link to="/prueba-tabla">
+            Prueba
+        </Link>
     </nav>
 )
 

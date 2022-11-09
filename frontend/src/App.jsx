@@ -8,6 +8,7 @@ import NuevoIngreso from './components/nuevoIngreso'
 import NuevaSalida from './components/nuevaSalida'
 import NuevaFactura from './components/nuevaFactura'
 import NuevoCliente from './components/nuevoCliente'
+import TableList from './components/pruebaTabla'
 import Home from './components/home'
 import Nav from './Nav'
 import reactLogo from './assets/Total.png'
@@ -34,6 +35,7 @@ function App() {
         <Route path='/salidas' element={<Salidas />} />
         <Route path='/nueva-factura' element={<NuevaFactura />} />
         <Route path='/facturas' element={<Facturas />} />
+        <Route path='/prueba-tabla' element={<TableList />} />
       </Routes>
     </div>
   )
