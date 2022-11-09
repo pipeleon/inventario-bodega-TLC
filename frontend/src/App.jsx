@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Ingresos from './components/ingresos'
 import Salidas from './components/salidas'
 import Pallets from './components/pallets'
+import Facturas from './components/facturas'
 import NuevoIngreso from './components/nuevoIngreso'
 import NuevaSalida from './components/nuevaSalida'
 import NuevaFactura from './components/nuevaFactura'
@@ -32,6 +33,7 @@ function App() {
         <Route path='/nueva-salida' element={<NuevaSalida />} />
         <Route path='/salidas' element={<Salidas />} />
         <Route path='/nueva-factura' element={<NuevaFactura />} />
+        <Route path='/facturas' element={<Facturas />} />
       </Routes>
     </div>
   )

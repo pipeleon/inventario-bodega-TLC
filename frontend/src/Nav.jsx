@@ -19,6 +19,10 @@ export const Nav = () => (
             Salidas
         </Link>
         &#9679;
+        <Link to="/facturas">
+            Facturas
+        </Link>
+        &#9679;
         <Link to="/nuevo-ingreso">
             Nuevo Ingreso
         </Link>

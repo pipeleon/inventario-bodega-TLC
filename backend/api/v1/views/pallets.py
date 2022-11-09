@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Pallets """
+from models.cliente import Cliente
 from models.ingreso import Ingreso
 from models.pallet import Pallet
 from models import storage
@@ -17,7 +18,9 @@ def get_pallets():
     for cliente in clientes:
         dictionary = cliente.to_dict()
         ingreso = storage.get(cls=Ingreso, id=cliente.ingreso_id)
+        cliente2 = storage.get(cls=Cliente, id=cliente.cliente_id)
         dictionary['consecutivo'] = ingreso.consecutivo
+        dictionary['cliente'] = cliente2.nombre
         lista_pallets.append(dictionary)
     
     return jsonify(lista_pallets)
@@ -39,6 +42,9 @@ def get_pallets_simplificado():
         peso_total = 0
         if len(lista_pallets_activas) > 0:
             dictionary['producto'] = lista_pallets_activas[0].producto
+            cliente_id = lista_pallets_activas[0].cliente_id
+            cliente = storage.get(cls=Cliente, id=cliente_id)
+            dictionary['cliente'] = cliente.nombre
             for pallet2 in lista_pallets_activas:
                 peso_total += pallet.peso
             dictionary['peso_total'] = peso_total

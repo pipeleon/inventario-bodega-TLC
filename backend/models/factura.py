@@ -24,6 +24,7 @@ class Factura(BaseModel, Base):
 
     if models.storage_t == "db":
         __tablename__ = 'facturas'
+        consecutivo = Column(String(7), nullable=False)
         inicio = Column(DateTime, nullable=False)
         fin = Column(DateTime, nullable=False)
         valor_cargues = Column(Float, nullable=True)

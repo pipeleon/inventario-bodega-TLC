@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-const PalletsRow = ({ id, producto, peso, referencia, created_at, referencia2, proovedor, consecutivo }) => (
+const PalletsRow = ({ id, producto, peso, referencia, created_at, referencia2, proovedor, consecutivo, cliente }) => (
     <tr>
         <td>{id.slice(-5)}</td>
         <td>{producto}</td>
@@ -11,6 +11,7 @@ const PalletsRow = ({ id, producto, peso, referencia, created_at, referencia2, p
         <td>{proovedor}</td>
         <td>{created_at.slice(0, 10)}</td>
         <td>{consecutivo}</td>
+        <td>{cliente}</td>
     </tr>
 )
 
@@ -38,6 +39,7 @@ function Inventario() {
                             <th>Proovedor</th>
                             <th>Fecha Ingreso</th>
                             <th>Ingreso ID</th>
+                            <th>Cliente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,13 +67,14 @@ function Inventario() {
     }
 }
 
-const IngresosRow = ({ consecutivo, created_at, total_pallets, producto, peso_total }) => (
+const IngresosRow = ({ consecutivo, created_at, total_pallets, producto, peso_total, cliente }) => (
     <tr>
         <td>{producto}</td>
         <td>{peso_total}</td>
         <td>{total_pallets}</td>
         <td>{consecutivo}</td>
         <td>{created_at.slice(0, 10)}</td>
+        <td>{cliente}</td>
     </tr>
 )
 
@@ -96,6 +99,7 @@ function InventarioSimp() {
                             <th>No. de Pallets</th>
                             <th>Ingreso ID</th>
                             <th>Fecha Ingreso</th>
+                            <th>Cliente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,8 +119,8 @@ function InventarioSimp() {
     else {
         return (
             <div>
-                <h3>Lista de Ingresos</h3>
-                <p>No hay Ingresos Aun</p>
+                <h3>Inventario</h3>
+                <p>No hay Inventario Aun</p>
             </div>
         )
     }

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Ingresos """
+from models.cliente import Cliente
 from models.ingreso import Ingreso
 from models.pallet import Pallet
 from models import storage
@@ -20,6 +21,9 @@ def get_ingresos():
         peso_total = 0
         if len(ingreso.lista_pallets) > 0:
             dictionary['producto'] = ingreso.lista_pallets[0].producto
+            cliente_id = ingreso.lista_pallets[0].cliente_id
+            cliente = storage.get(cls=Cliente, id=cliente_id)
+            dictionary['cliente'] = cliente.nombre
             for pallet in ingreso.lista_pallets:
                 peso_total += pallet.peso
         else:

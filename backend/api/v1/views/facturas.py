@@ -15,22 +15,16 @@ def get_facturas():
     """
     Devuelve todos las salidas
     """
-    salidas = storage.all(Salida).values()
-    lista_salidas = []
-    for salida in salidas:
-        dictionary = salida.to_dict()
-        dictionary['total_pallets'] = len(salida.lista_pallets)
-        peso_total = 0
-        if len(salida.lista_pallets) > 0:
-            dictionary['producto'] = salida.lista_pallets[0].producto
-            for pallet in salida.lista_pallets:
-                peso_total += pallet.peso
-        else:
-            dictionary['producto'] = 'N/A'
-        dictionary['peso_total'] = peso_total
-        lista_salidas.append(dictionary)
+    facturas = storage.all(Factura).values()
+    lista_facturas = []
+    for factura in facturas:
+        dictionary = factura.to_dict()
+        dictionary['total_pallets'] = len(factura.lista_pallets)
+        cliente = storage.get(cls=Cliente, id=factura.cliente_id)
+        dictionary['cliente'] = cliente.nombre
+        lista_facturas.append(dictionary)
     
-    return jsonify(lista_salidas)
+    return jsonify(lista_facturas)
 
 @app_views.route('/facturas', methods=['POST'], strict_slashes=False)
 def nueva_facturas():

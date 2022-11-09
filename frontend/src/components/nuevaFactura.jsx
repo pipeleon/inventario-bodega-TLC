@@ -12,6 +12,7 @@ function NuevaFactura() {
   const [cliente, setCliente] = useState("Cliente")
   const [cliente_id, setClienteID] = useState("")
   const [dropdown, setDropdown] = useState(false)
+  const [consecutivo, setConsecutivo] = useState("")
 
 
   const abrir = () => {
@@ -24,9 +25,10 @@ function NuevaFactura() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const data = {
       'factura': {
+        consecutivo,
         'inicio': startDate,
         'fin': endDate,
         cliente_id
@@ -52,6 +54,10 @@ function NuevaFactura() {
       <form onSubmit={
         handleSubmit
       }>
+        <label>No</label>
+        <input onChange={(e) => setConsecutivo(e.target.value)}
+          value={consecutivo} />
+          <br></br>
         <label>Fecha Inicial</label>
         <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
         <br></br>
