@@ -2,6 +2,18 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
+import {
+    Badge,
+    Button,
+    Card,
+    Form,
+    Navbar,
+    Nav,
+    Container,
+    Row,
+    Col,
+    Table
+} from "react-bootstrap";
 
 
 function NuevaSalida() {
@@ -50,72 +62,143 @@ function NuevaSalida() {
 
     if (pallets.length > 0) {
         return (
-            <div>
-                <h3>Inventario</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Id</th>
-                            <th>Producto</th>
-                            <th>Peso</th>
-                            <th>Referencia 1</th>
-                            <th>Referencia 2</th>
-                            <th>Proovedor</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Ingreso ID</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            pallets.map((pallet) =>
-                                !pallet.salida_id &&
-                                <tr>
-                                    <td><input type="checkbox" onChange={(e) => handleChange(e.target.value)}
-                                        value={pallet.id} /></td>
-                                    <td>{pallet.id.slice(-5)}</td>
-                                    <td>{pallet.producto}</td>
-                                    <td>{pallet.peso}</td>
-                                    <td>{pallet.referencia}</td>
-                                    <td>{pallet.referencia2}</td>
-                                    <td>{pallet.proovedor}</td>
-                                    <td>{pallet.created_at.slice(0, 10)}</td>
-                                    <td>{pallet.consecutivo}</td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table >
-                <div>
-                    <form onSubmit={
-                        handleSubmit
-                    }>
-                        <label>No</label>
-                        <input onChange={(e) => setConsecutivo(e.target.value)}
-                            value={consecutivo} />
-                        <br></br>
-                        <label>Fecha</label>
-                        <DatePicker selected={created_at} onChange={(date) => setCreated_at(date)} />
-                        <br></br>
-                        <label>Placa</label>
-                        <input onChange={(e) => setPlaca(e.target.value)}
-                            value={placa} />
-                        <br></br>
-                        <label>Contenedor</label>
-                        <input onChange={(e) => setContenedor(e.target.value)}
-                            value={contenedor} />
-
-                        <button>Guardar</button>
-                    </form>
-                </div>
-            </div>
+            <>
+                <Container fluid>
+                    <Row className='my-2'>
+                        <Col md="12">
+                            <Card>
+                                <Card.Header>
+                                    <Card.Title as="h3">Nueva Salida</Card.Title>
+                                </Card.Header>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="12">
+                            <Card className='strpied-tabled-with-hover'>
+                                <Card.Header>
+                                    <Card.Title as="h4">Inventario</Card.Title>
+                                </Card.Header>
+                                <Card.Body className='table-full-width table-responsive px-0'>
+                                    <Table className='table-hover table-striped'>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Id</th>
+                                                <th>Producto</th>
+                                                <th>Peso</th>
+                                                <th>Referencia 1</th>
+                                                <th>Referencia 2</th>
+                                                <th>Proovedor</th>
+                                                <th>Fecha Ingreso</th>
+                                                <th>Ingreso ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                pallets.map((pallet) =>
+                                                    !pallet.salida_id &&
+                                                    <tr>
+                                                        <td><input type="checkbox" onChange={(e) => handleChange(e.target.value)}
+                                                            value={pallet.id} /></td>
+                                                        <td>{pallet.id.slice(-5)}</td>
+                                                        <td>{pallet.producto}</td>
+                                                        <td>{pallet.peso}</td>
+                                                        <td>{pallet.referencia}</td>
+                                                        <td>{pallet.referencia2}</td>
+                                                        <td>{pallet.proovedor}</td>
+                                                        <td>{pallet.created_at.slice(0, 10)}</td>
+                                                        <td>{pallet.consecutivo}</td>
+                                                    </tr>
+                                                )
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row className='my-2'>
+                        <Col md="12">
+                            <Card>
+                                <Card.Header>
+                                    <Card.Title as="h4">Datos Salida</Card.Title>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Form onSubmit={handleSubmit}>
+                                        <Row>
+                                            <Col className='pr-1' md="6">
+                                                <Form.Group>
+                                                    <label>No</label>
+                                                    <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
+                                                        value={consecutivo}
+                                                        type="text"
+                                                    ></Form.Control>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <label>Fecha</label>
+                                                <DatePicker selected={created_at} onChange={(date) => setCreated_at(date)} />
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col className='pr-1' md="6">
+                                                <Form.Group>
+                                                    <label>Placa</label>
+                                                    <Form.Control onChange={(e) => setPlaca(e.target.value)}
+                                                        value={placa}
+                                                        type="text"
+                                                    ></Form.Control>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col className='pr-1' md="6">
+                                                <Form.Group>
+                                                    <label>Contenedor</label>
+                                                    <Form.Control onChange={(e) => setContenedor(e.target.value)}
+                                                        value={contenedor}
+                                                        type="text"
+                                                    ></Form.Control>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <Button
+                                                    className="mt-4 btn-fill right-3"
+                                                    type="submit"
+                                                    variant="info"
+                                                >
+                                                    Generar
+                                                </Button>
+                                                <div className="clearfix"></div>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         )
     }
     else {
         return (
             <div>
-                <h3>Inventario</h3>
-                <p>No hay Mercancia Aun</p>
+                 <Container fluid>
+                    <Row>
+                        <Col md="12">
+                            <Card className='strpied-tabled-with-hover'>
+                                <Card.Header>
+                                    <Card.Title as="h4">Nueva Salida</Card.Title>
+                                    <p className="card-category">
+                                        No hay Inventario Aun
+                                    </p>
+                                </Card.Header>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
     }

@@ -10,7 +10,7 @@ import NuevaFactura from './components/nuevaFactura'
 import NuevoCliente from './components/nuevoCliente'
 import TableList from './components/pruebaTabla'
 import Home from './components/home'
-import Nav from './Nav'
+import Nav2 from './Nav'
 import reactLogo from './assets/Total.png'
 
 
@@ -18,13 +18,15 @@ function App() {
   
   return (
     <div className="App">
+      /*
       <div>
         <a href="https://reactjs.org" target="_blank">
           <img src={reactLogo} />
         </a>
       </div>
       <h1>Inventario Total Logistics Cargo</h1>
-      <Nav />
+      */
+      <Nav2 />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/ingresos' element={<Ingresos />} />

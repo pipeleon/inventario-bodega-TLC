@@ -1,5 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
+import {
+  Badge,
+  Button,
+  Card,
+  Form,
+  Navbar,
+  Nav,
+  Container,
+  Row,
+  Col
+} from "react-bootstrap";
 
 function NuevoCliente() {
   const [nombre, setNombre] = useState("")
@@ -32,27 +43,81 @@ function NuevoCliente() {
   }
 
   return (
-    <div>
-      <h3>Nuevo Cliente</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Nombre</label>
-        <input onChange={(e) => setNombre(e.target.value)}
-          value={nombre} />
-        <label>Nit</label>
-        <input onChange={(e) => setNit(e.target.value)}
-          value={nit} />
-        <label>Tarifa Cargue</label>
-        <input onChange={(e) => setCargue(e.target.value)}
-          value={tarifa_cargue} />
-        <label>Tarifa Almacenamiento</label>
-        <input onChange={(e) => setAlmacena(e.target.value)}
-          value={tarifa_almacenamiento} />
-        <label>Tasa Seguro</label>
-        <input onChange={(e) => setSeguro(e.target.value)}
-          value={tasa_seguro} />
-        <button>Guardar</button>
-      </form>
-    </div>
+    <>
+      <Container fluid>
+        <Row>
+          <Col md="8">
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Nuevo Cliente</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                <Form onSubmit={handleSubmit}>
+                  <Row>
+                    <Col className='pr-1' md="6">
+                      <Form.Group>
+                        <label>Nombre</label>
+                        <Form.Control onChange={(e) => setNombre(e.target.value)}
+                          value={nombre}
+                          type="text"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className='px-1' md="6">
+                      <Form.Group>
+                        <label>Nit</label>
+                        <Form.Control onChange={(e) => setNit(e.target.value)}
+                          value={nit}
+                          type="text"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row className='mt-3'>
+                  <Col className='pr-1' md="4">
+                      <Form.Group>
+                        <label>Tarifa Cargue</label>
+                        <Form.Control onChange={(e) => setCargue(e.target.value)}
+                          value={tarifa_cargue}
+                          type="text"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className='px-1' md="4">
+                      <Form.Group>
+                        <label>Tarifa Almacenamiento</label>
+                        <Form.Control onChange={(e) => setAlmacena(e.target.value)}
+                          value={tarifa_almacenamiento}
+                          type="text"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className='px-1' md="4">
+                      <Form.Group>
+                        <label>Tasa Seguro</label>
+                        <Form.Control onChange={(e) => setSeguro(e.target.value)}
+                          value={tasa_seguro}
+                          type="text"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Button
+                    className="mt-5 btn-fill pull-right"
+                    type="submit"
+                    variant="info"
+                  >
+                    Guardar
+                  </Button>
+                  <div className="clearfix"></div>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+      
+    </>
   )
 }
 
