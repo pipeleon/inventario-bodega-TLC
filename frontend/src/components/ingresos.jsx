@@ -11,25 +11,12 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-
-
-const IngresosRow = ({ consecutivo, pedido, placa, contenedor, created_at, total_pallets, producto, peso_total, cliente }) => (
-    <tr>
-        <td>{consecutivo}</td>
-        <td>{created_at.slice(0, 10)}</td>
-        <td>{pedido}</td>
-        <td>{placa}</td>
-        <td>{contenedor ? contenedor : 'N/A'}</td>
-        <td>{total_pallets}</td>
-        <td>{producto}</td>
-        <td>{peso_total}</td>
-        <td>{cliente}</td>
-    </tr>
-)
+import { generatePath, useNavigate } from 'react-router-dom';
 
 function Ingresos() {
 
     const [ingresos, setIngresos] = useState([])
+    let navigate = useNavigate()
 
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setIngresos(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
@@ -60,15 +47,27 @@ function Ingresos() {
                                                 <th>Producto</th>
                                                 <th>Peso total</th>
                                                 <th>Cliente</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 ingresos.map((ingreso) =>
-                                                    <IngresosRow
-                                                        key={ingreso.id}
-                                                        {...ingreso}
-                                                    />
+                                                    <tr>
+                                                        <td>{ingreso.consecutivo}</td>
+                                                        <td>{ingreso.created_at.slice(0, 10)}</td>
+                                                        <td>{ingreso.pedido}</td>
+                                                        <td>{ingreso.placa}</td>
+                                                        <td>{ingreso.contenedor ? ingreso.contenedor : 'N/A'}</td>
+                                                        <td>{ingreso.total_pallets}</td>
+                                                        <td>{ingreso.producto}</td>
+                                                        <td>{ingreso.peso_total}</td>
+                                                        <td>{ingreso.cliente}</td>
+                                                        <td><Button onClick={() => {
+                                                            const path = generatePath("/ingreso/:id",  {id: ingreso.id})
+                                                            console.log(path)
+                                                            navigate(path) }}>Ver</Button></td>
+                                                    </tr>
                                                 )
                                             }
                                         </tbody>
