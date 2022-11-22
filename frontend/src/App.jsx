@@ -9,6 +9,7 @@ import NuevaSalida from './components/nuevaSalida'
 import NuevaFactura from './components/nuevaFactura'
 import NuevoCliente from './components/nuevoCliente'
 import IngresoById from './components/ingresoById'
+import SalidaById from './components/salidaById'
 import TableList from './components/pruebaTabla'
 import Home from './components/home'
 import Nav2 from './Nav'
@@ -56,6 +57,7 @@ function App() {
         <Route path='/facturas' element={<Facturas />} />
         <Route path='/prueba-tabla' element={<TableList />} />
         <Route path='/ingreso/:id' element={<IngresoById />} />
+        <Route path='/salida/:id' element={<SalidaById />} />
       </Routes>
     </div>
   )

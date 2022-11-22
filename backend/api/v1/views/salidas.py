@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Salidas """
+from models.cliente import Cliente
 from models.salida import Salida
 from models.pallet import Pallet
 from models import storage
@@ -53,3 +54,37 @@ def nueva_salidas():
         get_pallet.save()
 
     return make_response(jsonify(nueva_salida.to_dict()), 201)
+
+@app_views.route('/salida/<id>', methods=['GET'], strict_slashes=False)
+def get_salida(id):
+    """
+    Get Ingreso by Id
+    """
+
+    salida = storage.get(cls=Salida, id=id)
+
+    salida_info = salida.to_dict()
+    salida_info['total_pallets'] = len(salida.lista_pallets)
+    peso_total = 0
+    if len(salida.lista_pallets) > 0:
+        salida_info['producto'] = salida.lista_pallets[0].producto
+        cliente_id = salida.lista_pallets[0].cliente_id
+        cliente = storage.get(cls=Cliente, id=cliente_id)
+        salida_info['cliente'] = cliente.nombre
+        for pallet in salida.lista_pallets:
+            peso_total += pallet.peso
+    else:
+        salida_info['producto'] = 'N/A'
+    salida_info['peso_total'] = peso_total
+
+    dictionary ={}
+    dictionary["salida"] = salida_info
+
+    
+    lista = []
+    for pallet in salida.lista_pallets:
+        lista.append(pallet.to_dict())
+    dictionary["pallets"] = lista
+    
+
+    return jsonify(dictionary)

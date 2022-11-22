@@ -10,22 +10,12 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-
-const SalidasRow = ({ consecutivo, pedido, placa, contenedor, created_at, total_pallets, producto, peso_total }) => (
-    <tr>
-        <td>{consecutivo}</td>
-        <td>{created_at.slice(0, 10)}</td>
-        <td>{placa}</td>
-        <td>{contenedor ? contenedor : 'N/A'}</td>
-        <td>{total_pallets}</td>
-        <td>{producto}</td>
-        <td>{peso_total}</td>
-    </tr>
-)
+import { generatePath, useNavigate } from 'react-router-dom';
 
 function Salidas() {
 
     const [salidas, setSalidas] = useState([])
+    let navigate = useNavigate()
 
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setSalidas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
@@ -54,15 +44,24 @@ function Salidas() {
                                                 <th>No. de Pallets</th>
                                                 <th>Producto</th>
                                                 <th>Peso total</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 salidas.map((salida) =>
-                                                    <SalidasRow
-                                                        key={salida.id}
-                                                        {...salida}
-                                                    />
+                                                    <tr>
+                                                        <td>{salida.consecutivo}</td>
+                                                        <td>{salida.created_at.slice(0, 10)}</td>
+                                                        <td>{salida.placa}</td>
+                                                        <td>{salida.contenedor ? salida.contenedor : 'N/A'}</td>
+                                                        <td>{salida.total_pallets}</td>
+                                                        <td>{salida.producto}</td>
+                                                        <td>{salida.peso_total}</td>
+                                                        <td><Button onClick={() => {
+                                                            const path = generatePath("/salida/:id",  {id: salida.id})
+                                                            navigate(path) }}>Ver</Button></td>
+                                                    </tr>
                                                 )
                                             }
                                         </tbody>

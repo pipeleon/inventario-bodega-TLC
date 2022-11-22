@@ -65,7 +65,6 @@ function Ingresos() {
                                                         <td>{ingreso.cliente}</td>
                                                         <td><Button onClick={() => {
                                                             const path = generatePath("/ingreso/:id",  {id: ingreso.id})
-                                                            console.log(path)
                                                             navigate(path) }}>Ver</Button></td>
                                                     </tr>
                                                 )
