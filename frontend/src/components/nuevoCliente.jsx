@@ -16,6 +16,7 @@ function NuevoCliente() {
   const [nombre, setNombre] = useState("")
   const [nit, setNit] = useState("")
   const [tarifa_cargue, setCargue] = useState("")
+  const [tarifa_descargue, setDescargue] = useState("")
   const [tarifa_almacenamiento, setAlmacena] = useState("")
   const [tasa_seguro, setSeguro] = useState("")
 
@@ -26,6 +27,7 @@ function NuevoCliente() {
       nombre,
       nit,
       tarifa_cargue,
+      tarifa_descargue,
       tarifa_almacenamiento,
       tasa_seguro
     }
@@ -74,7 +76,7 @@ function NuevoCliente() {
                     </Col>
                   </Row>
                   <Row className='mt-3'>
-                  <Col className='pr-1' md="4">
+                    <Col className='pr-1' md="3">
                       <Form.Group>
                         <label>Tarifa Cargue</label>
                         <Form.Control onChange={(e) => setCargue(e.target.value)}
@@ -83,7 +85,16 @@ function NuevoCliente() {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col className='px-1' md="4">
+                    <Col className='pr-1' md="3">
+                      <Form.Group>
+                        <label>Tarifa Descargue</label>
+                        <Form.Control onChange={(e) => setDescargue(e.target.value)}
+                          value={tarifa_descargue}
+                          type="text"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className='px-1' md="3">
                       <Form.Group>
                         <label>Tarifa Almacenamiento</label>
                         <Form.Control onChange={(e) => setAlmacena(e.target.value)}
@@ -92,7 +103,7 @@ function NuevoCliente() {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col className='px-1' md="4">
+                    <Col className='px-1' md="3">
                       <Form.Group>
                         <label>Tasa Seguro</label>
                         <Form.Control onChange={(e) => setSeguro(e.target.value)}
@@ -116,7 +127,7 @@ function NuevoCliente() {
           </Col>
         </Row>
       </Container>
-      
+
     </>
   )
 }

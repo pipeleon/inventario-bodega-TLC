@@ -31,6 +31,10 @@ function NuevaSalida() {
         fetch("http://localhost:5000/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
+    useEffect(() => {
+        fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setConsecutivo("D-000"+(data.length+1)))
+      }, [])
+
     const handleChange = (id) => {
         console.log(id)
         pallets_salida.includes(id) ? pallets_salida.splice(pallets_salida.indexOf(id), 1) && setPallets2(pallets_salida) : setPallets2([...pallets_salida, id])
@@ -132,6 +136,7 @@ function NuevaSalida() {
                                                     <label>No</label>
                                                     <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
                                                         value={consecutivo}
+                                                        disabled="true"
                                                         type="text"
                                                     ></Form.Control>
                                                 </Form.Group>

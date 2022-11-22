@@ -65,10 +65,10 @@ function FacturaById() {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{factura.factura.valor_cargues}</td>
-                                                <td>{factura.factura.valor_descargues}</td>
-                                                <td>{factura.factura.valor_seguro}</td>
-                                                <td>{factura.factura.valor_almacenamiento}</td>
+                                                <td>{new Intl.NumberFormat().format(factura.factura.valor_cargues)}</td>
+                                                <td>{new Intl.NumberFormat().format(factura.factura.valor_descargues)}</td>
+                                                <td>{new Intl.NumberFormat().format(factura.factura.valor_seguro)}</td>
+                                                <td>{new Intl.NumberFormat().format(factura.factura.valor_almacenamiento)}</td>
                                             </tr>
                                         </tbody>
                                     </Table>

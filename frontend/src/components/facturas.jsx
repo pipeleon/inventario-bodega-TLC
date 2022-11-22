@@ -58,10 +58,10 @@ function Facturas() {
                                                         <td>{factura.consecutivo}</td>
                                                         <td>{factura.inicio.slice(4, 16)}</td>
                                                         <td>{factura.fin.slice(4, 16)}</td>
-                                                        <td>{factura.valor_cargues}</td>
-                                                        <td>{factura.valor_descargues}</td>
-                                                        <td>{factura.valor_seguro}</td>
-                                                        <td>{factura.valor_almacenamiento}</td>
+                                                        <td>{new Intl.NumberFormat().format(factura.valor_cargues)}</td>
+                                                        <td>{new Intl.NumberFormat().format(factura.valor_descargues)}</td>
+                                                        <td>{new Intl.NumberFormat().format(factura.valor_seguro)}</td>
+                                                        <td>{new Intl.NumberFormat().format(factura.valor_almacenamiento)}</td>
                                                         <td>{factura.total_pallets}</td>
                                                         <td>{factura.cliente}</td>
                                                         <td><Button onClick={() => {

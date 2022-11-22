@@ -34,6 +34,10 @@ function NuevaFactura() {
     fetch("http://localhost:5000/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
   }, [])
 
+  useEffect(() => {
+    fetch("http://localhost:5000/api/v1/facturas").then((response) => response.json()).then((data) => setConsecutivo("F-000"+(data.length+1)))
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -77,6 +81,7 @@ function NuevaFactura() {
                         <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
                           value={consecutivo}
                           type="text"
+                          disabled="true"
                         ></Form.Control>
                       </Form.Group>
                     </Col>

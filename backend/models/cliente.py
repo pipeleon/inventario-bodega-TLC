@@ -16,6 +16,7 @@ class Cliente(BaseModel, Base):
         nombre = Column(String(15), nullable=False)
         nit = Column(Integer, nullable=False)
         tarifa_cargue = Column(Integer, nullable=False)
+        tarifa_descargue = Column(Integer, nullable=False)
         tarifa_almacenamiento = Column(Integer, nullable=False)
         tasa_seguro = Column(Float, nullable=False)
         lista_pallets = relationship("Pallet", backref="clientes", cascade="all, delete, delete-orphan")

@@ -81,6 +81,10 @@ function NuevoIngreso() {
     fetch("http://localhost:5000/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
   }, [])
 
+  useEffect(() => {
+    fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-000"+(data.length+1)))
+  }, [])
+
   console.log(array)
 
   const handleSubmit = (e) => {
@@ -157,9 +161,10 @@ function NuevoIngreso() {
                     <Col className='pr-1' md="6">
                       <Form.Group>
                         <label>No</label>
-                        <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
-                          value={consecutivo}
+                        <Form.Control onChange={(e) => setConsecutivo(e.target.value)}                          
                           type="text"
+                          disabled="true"
+                          value={consecutivo}
                         ></Form.Control>
                       </Form.Group>
                     </Col>

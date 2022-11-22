@@ -89,7 +89,7 @@ def nueva_facturas():
             if salida.created_at <= nueva_factura.fin and salida.created_at >= nueva_factura.inicio:
                 peso_descargue += pallet.peso
     
-    nueva_factura.valor_descargues = peso_descargue * cliente.tarifa_cargue
+    nueva_factura.valor_descargues = peso_descargue * cliente.tarifa_descargue
     nueva_factura.save()
 
     delta = nueva_factura.fin - nueva_factura.inicio
