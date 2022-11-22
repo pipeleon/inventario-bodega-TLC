@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Facturas """
+from models.ingreso import Ingreso
 from models.factura import Factura, pallet_factura
 from models.pallet import Pallet
 from models.salida import Salida
@@ -195,10 +196,39 @@ def nueva_facturas():
                             storage.save()
     
     nueva_factura.valor_almacenamiento = peso_almacenamiento * cliente.tarifa_almacenamiento
-    nueva_factura.save() 
-
-
-
-    
+    nueva_factura.save()    
 
     return make_response(jsonify(nueva_factura.to_dict()), 201)
+
+@app_views.route('/factura/<id>', methods=['GET'], strict_slashes=False)
+def get_factura(id):
+    """
+    Get Factura by Id
+    """
+
+    factura = storage.get(cls=Factura, id=id)
+
+    factura_info = factura.to_dict()
+    factura_info['total_pallets'] = len(factura.lista_pallets)
+    if len(factura.lista_pallets) > 0:
+        cliente_id = factura.lista_pallets[0].cliente_id
+        cliente = storage.get(cls=Cliente, id=cliente_id)
+        factura_info['cliente'] = cliente.nombre
+
+    dictionary ={}
+    dictionary["factura"] = factura_info
+
+    
+    lista = []
+    for pallet in factura.lista_pallets:
+        temporal = pallet.to_dict()
+        ingreso = storage.get(cls=Ingreso, id=pallet.ingreso_id)
+        temporal["fecha_ingreso"] = ingreso.created_at
+        if pallet.salida_id:
+            salida = storage.get(cls=Salida, id=pallet.salida_id)
+            temporal["fecha_salida"] = salida.created_at        
+        lista.append(temporal)
+    dictionary["pallets"] = lista
+    
+
+    return jsonify(dictionary)

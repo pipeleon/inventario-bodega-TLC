@@ -12,24 +12,12 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
+import { generatePath, useNavigate } from 'react-router-dom';
 
-
-const IngresosRow = ({ inicio, fin, valor_cargues, valor_descargues, valor_almacenamiento, valor_seguro, total_pallets, cliente, consecutivo }) => (
-    <tr>
-        <td>{consecutivo}</td>
-        <td>{inicio.slice(4, 16)}</td>
-        <td>{fin.slice(4, 16)}</td>
-        <td>{valor_cargues}</td>
-        <td>{valor_descargues}</td>
-        <td>{valor_seguro}</td>
-        <td>{valor_almacenamiento}</td>
-        <td>{total_pallets}</td>
-        <td>{cliente}</td>
-    </tr>
-)
 
 function Facturas() {
     const [facturas, setFacturas] = useState([])
+    let navigate = useNavigate()
 
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/facturas").then((response) => response.json()).then((data) => setFacturas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
@@ -60,15 +48,26 @@ function Facturas() {
                                                 <th>Valor Almacenamiento</th>
                                                 <th>Pallets total</th>
                                                 <th>Cliente</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                facturas.map((ingreso) =>
-                                                    <IngresosRow
-                                                        key={ingreso.id}
-                                                        {...ingreso}
-                                                    />
+                                                facturas.map((factura) =>
+                                                    <tr>
+                                                        <td>{factura.consecutivo}</td>
+                                                        <td>{factura.inicio.slice(4, 16)}</td>
+                                                        <td>{factura.fin.slice(4, 16)}</td>
+                                                        <td>{factura.valor_cargues}</td>
+                                                        <td>{factura.valor_descargues}</td>
+                                                        <td>{factura.valor_seguro}</td>
+                                                        <td>{factura.valor_almacenamiento}</td>
+                                                        <td>{factura.total_pallets}</td>
+                                                        <td>{factura.cliente}</td>
+                                                        <td><Button onClick={() => {
+                                                            const path = generatePath("/factura/:id",  {id: factura.id})
+                                                            navigate(path) }}>Ver</Button></td>
+                                                    </tr>
                                                 )
                                             }
                                         </tbody>
