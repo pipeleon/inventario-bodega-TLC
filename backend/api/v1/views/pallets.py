@@ -51,3 +51,18 @@ def get_pallets_simplificado():
             lista_ingresos.append(dictionary)
     
     return jsonify(lista_ingresos)
+
+@app_views.route('/pallet/<id>', methods=['GET'], strict_slashes=False)
+def get_pallet(id):
+    """
+    Devuelve todos los Pallets
+    """
+    pallet = storage.get(cls=Pallet, id=id)
+    pallet_info = pallet.to_dict()
+
+    ingreso = storage.get(cls=Ingreso, id=pallet.ingreso_id)
+    cliente = storage.get(cls=Cliente, id=pallet.cliente_id)
+    pallet_info['consecutivo'] = ingreso.consecutivo
+    pallet_info['cliente'] = cliente.nombre    
+    
+    return jsonify(pallet_info)

@@ -11,23 +11,11 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-
-const PalletsRow = ({ id, producto, peso, referencia, created_at, referencia2, proovedor, consecutivo, cliente }) => (
-    <tr>
-        <td>{id.slice(-5)}</td>
-        <td>{producto}</td>
-        <td>{peso}</td>
-        <td>{referencia}</td>
-        <td>{referencia2}</td>
-        <td>{proovedor}</td>
-        <td>{created_at.slice(0, 10)}</td>
-        <td>{consecutivo}</td>
-        <td>{cliente}</td>
-    </tr>
-)
+import { generatePath, useNavigate } from 'react-router-dom';
 
 function Inventario() {
     const [pallets, setPallets] = useState([])
+    let navigate = useNavigate()
 
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
@@ -58,16 +46,27 @@ function Inventario() {
                                                 <th>Fecha Ingreso</th>
                                                 <th>Ingreso ID</th>
                                                 <th>Cliente</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 pallets.map((pallet) =>
                                                     !pallet.salida_id &&
-                                                    <PalletsRow
-                                                        key={pallet.id}
-                                                        {...pallet}
-                                                    />
+                                                    <tr>
+                                                        <td>{pallet.id.slice(-5)}</td>
+                                                        <td>{pallet.producto}</td>
+                                                        <td>{pallet.peso}</td>
+                                                        <td>{pallet.referencia}</td>
+                                                        <td>{pallet.referencia2}</td>
+                                                        <td>{pallet.proovedor}</td>
+                                                        <td>{pallet.created_at.slice(0, 10)}</td>
+                                                        <td>{pallet.consecutivo}</td>
+                                                        <td>{pallet.cliente}</td>
+                                                        <td><Button onClick={() => {
+                                                            const path = generatePath("/pallet/:id",  {id: pallet.id})
+                                                            navigate(path) }}>Ver</Button></td>
+                                                    </tr>
                                                 )
                                             }
                                         </tbody>
@@ -166,21 +165,21 @@ function InventarioSimp() {
     else {
         return (
             <>
-            <Container fluid>
-                <Row>
-                    <Col md="12">
-                        <Card className='strpied-tabled-with-hover'>
-                            <Card.Header>
-                                <Card.Title as="h4">Inventario</Card.Title>
-                                <p className="card-category">
-                                    No hay Inventario Aun
-                                </p>
-                            </Card.Header>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-        </>
+                <Container fluid>
+                    <Row>
+                        <Col md="12">
+                            <Card className='strpied-tabled-with-hover'>
+                                <Card.Header>
+                                    <Card.Title as="h4">Inventario</Card.Title>
+                                    <p className="card-category">
+                                        No hay Inventario Aun
+                                    </p>
+                                </Card.Header>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         )
     }
 }

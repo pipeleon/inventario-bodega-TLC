@@ -8,11 +8,12 @@ from models.pallet import Pallet
 from models.ingreso import Ingreso
 from models.salida import Salida
 from models.factura import Factura
+from models.observacion import Observacion
 import shlex
 
 
 classes = {"Pallet": Pallet, "BaseModel": BaseModel, "Ingreso": Ingreso,
-           "Salida": Salida, "Factura": Factura}
+           "Salida": Salida, "Factura": Factura, "Observacion": Observacion}
 
 
 class HBNBCommand(cmd.Cmd):

@@ -11,6 +11,7 @@ import NuevoCliente from './components/nuevoCliente'
 import IngresoById from './components/ingresoById'
 import SalidaById from './components/salidaById'
 import FacturaById from './components/facturaById'
+import PalletById from './components/palletById'
 import TableList from './components/pruebaTabla'
 import Home from './components/home'
 import Nav2 from './Nav'
@@ -60,6 +61,7 @@ function App() {
         <Route path='/ingreso/:id' element={<IngresoById />} />
         <Route path='/salida/:id' element={<SalidaById />} />
         <Route path='/factura/:id' element={<FacturaById />} />
+        <Route path='/pallet/:id' element={<PalletById />} />
       </Routes>
     </div>
   )

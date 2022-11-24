@@ -13,3 +13,4 @@ from api.v1.views.clientes import *
 from api.v1.views.pallets import *
 from api.v1.views.salidas import *
 from api.v1.views.facturas import *
+from api.v1.views.observaciones import *

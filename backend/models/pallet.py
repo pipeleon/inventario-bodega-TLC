@@ -22,6 +22,7 @@ class Pallet(BaseModel, Base):
         cliente_id = Column(String(60), ForeignKey('clientes.id'), nullable=False)
         ingreso_id = Column(String(60), ForeignKey('ingresos.id'), nullable=False)
         salida_id = Column(String(60), ForeignKey('salidas.id'), nullable=True)
+        lista_observaciones = relationship("Observacion", backref="observaciones", cascade="all, delete, delete-orphan")
     else:
         producto = ""
         #proovedor = ""
