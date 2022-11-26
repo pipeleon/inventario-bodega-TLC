@@ -21,7 +21,25 @@ function Salidas() {
         fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setSalidas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
+    const calcularTotalPeso = (lista) => {
+        let total = 0
 
+        lista.map((unidad) => {
+            total += unidad.peso_total
+        })
+
+        return (total)
+    }
+
+    const calcularTotalPallet = (lista) => {
+        let total = 0
+
+        lista.map((unidad) => {
+            total += unidad.total_pallets
+        })
+
+        return (total)
+    } 
 
     if (salidas.length > 0) {
         return (
@@ -41,7 +59,7 @@ function Salidas() {
                                                 <th>Fecha</th>
                                                 <th>Placa</th>
                                                 <th>Contenedor</th>
-                                                <th>No. de Pallets</th>
+                                                <th className='text-center'>No. de Pallets</th>
                                                 <th>Producto</th>
                                                 <th>Peso total</th>
                                                 <th></th>
@@ -55,15 +73,24 @@ function Salidas() {
                                                         <td>{salida.created_at.slice(0, 10)}</td>
                                                         <td>{salida.placa}</td>
                                                         <td>{salida.contenedor ? salida.contenedor : 'N/A'}</td>
-                                                        <td>{salida.total_pallets}</td>
+                                                        <td className='text-center'>{salida.total_pallets}</td>
                                                         <td>{salida.producto}</td>
-                                                        <td>{salida.peso_total}</td>
+                                                        <td className='text-end'>{new Intl.NumberFormat().format(salida.peso_total.toFixed(0))}</td>
                                                         <td><Button onClick={() => {
                                                             const path = generatePath("/salida/:id",  {id: salida.id})
                                                             navigate(path) }}>Ver</Button></td>
                                                     </tr>
                                                 )
                                             }
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td className='text-center'>{calcularTotalPallet(salidas)}</td>
+                                                <td></td>
+                                                <td className='text-end'>{new Intl.NumberFormat().format(calcularTotalPeso(salidas).toFixed(0))}</td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                 </Card.Body>

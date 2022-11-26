@@ -82,7 +82,7 @@ function NuevoIngreso() {
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-000"+(data.length+1)))
+    fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00"+(data.length+1)))
   }, [])
 
   console.log(array)
@@ -142,6 +142,8 @@ function NuevoIngreso() {
         body: JSON.stringify(data)
       }).then((response) => response.json()).then((data) => console.log(data))
       alert("Ingreso " + consecutivo + " generado")
+      fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00"+(data.length+1)))
+      
     }
 
   }

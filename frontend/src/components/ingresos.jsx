@@ -22,7 +22,25 @@ function Ingresos() {
         fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setIngresos(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
+    const calcularTotalPeso = (lista) => {
+        let total = 0
 
+        lista.map((unidad) => {
+            total += unidad.peso_total
+        })
+
+        return (total)
+    }
+
+    const calcularTotalPallet = (lista) => {
+        let total = 0
+
+        lista.map((unidad) => {
+            total += unidad.total_pallets
+        })
+
+        return (total)
+    } 
 
     if (ingresos.length > 0) {
         return (
@@ -43,7 +61,7 @@ function Ingresos() {
                                                 <th>Pedido</th>
                                                 <th>Placa</th>
                                                 <th>Contenedor</th>
-                                                <th>No. de Pallets</th>
+                                                <th className='text-center'>No. de Pallets</th>
                                                 <th>Producto</th>
                                                 <th>Peso total</th>
                                                 <th>Cliente</th>
@@ -54,14 +72,14 @@ function Ingresos() {
                                             {
                                                 ingresos.map((ingreso) =>
                                                     <tr>
-                                                        <td>{ingreso.consecutivo}</td>
+                                                        <td className='w-5'>{ingreso.consecutivo}</td>
                                                         <td>{ingreso.created_at.slice(0, 10)}</td>
                                                         <td>{ingreso.pedido}</td>
                                                         <td>{ingreso.placa}</td>
                                                         <td>{ingreso.contenedor ? ingreso.contenedor : 'N/A'}</td>
-                                                        <td>{ingreso.total_pallets}</td>
+                                                        <td className='text-center'>{ingreso.total_pallets}</td>
                                                         <td>{ingreso.producto}</td>
-                                                        <td>{ingreso.peso_total}</td>
+                                                        <td className='text-end'>{new Intl.NumberFormat().format(ingreso.peso_total.toFixed(0))}</td>
                                                         <td>{ingreso.cliente}</td>
                                                         <td><Button onClick={() => {
                                                             const path = generatePath("/ingreso/:id",  {id: ingreso.id})
@@ -69,6 +87,16 @@ function Ingresos() {
                                                     </tr>
                                                 )
                                             }
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td className='text-center'>{calcularTotalPallet(ingresos)}</td>
+                                                <td></td>
+                                                <td className='text-end'>{new Intl.NumberFormat().format(calcularTotalPeso(ingresos).toFixed(0))}</td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                 </Card.Body>

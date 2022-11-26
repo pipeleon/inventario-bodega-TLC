@@ -84,6 +84,7 @@ function SalidaById() {
                                                 <th>Referencia 1</th>
                                                 <th>Referencia 2</th>
                                                 <th>Proovedor</th>
+                                                <th>Pedido</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -95,6 +96,7 @@ function SalidaById() {
                                                     <td>{pallet.referencia}</td>
                                                     <td>{pallet.referencia2}</td>
                                                     <td>{pallet.proovedor}</td>
+                                                    <td>{pallet.pedido}</td>
                                                 </tr>)}
                                         </tbody>
                                     </Table>

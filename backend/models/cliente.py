@@ -13,7 +13,7 @@ class Cliente(BaseModel, Base):
 
     if models.storage_t == "db":
         __tablename__ = 'clientes'
-        nombre = Column(String(15), nullable=False)
+        nombre = Column(String(30), nullable=False)
         nit = Column(Integer, nullable=False)
         tarifa_cargue = Column(Integer, nullable=False)
         tarifa_descargue = Column(Integer, nullable=False)

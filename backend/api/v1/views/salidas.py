@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Salidas """
+from models.ingreso import Ingreso
 from models.cliente import Cliente
 from models.salida import Salida
 from models.pallet import Pallet
@@ -83,7 +84,10 @@ def get_salida(id):
     
     lista = []
     for pallet in salida.lista_pallets:
-        lista.append(pallet.to_dict())
+        nuevo = pallet.to_dict()
+        cliente = storage.get(cls=Ingreso, id=pallet.ingreso_id)
+        nuevo['pedido'] = cliente.pedido
+        lista.append(nuevo)
     dictionary["pallets"] = lista
     
 
