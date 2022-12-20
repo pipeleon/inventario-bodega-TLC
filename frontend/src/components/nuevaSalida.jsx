@@ -32,7 +32,7 @@ function NuevaSalida() {
     }, [])
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setConsecutivo("D-000"+(data.length+1)))
+        fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setConsecutivo("D-00"+(data.length+1)))
       }, [])
 
     const handleChange = (id) => {

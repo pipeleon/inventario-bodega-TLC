@@ -59,7 +59,7 @@ function IngresoById() {
                                                 <td>{ingreso.ingreso.contenedor ? ingreso.ingreso.contenedor : 'N/A'}</td>
                                                 <td>{ingreso.ingreso.total_pallets}</td>
                                                 <td>{ingreso.ingreso.producto}</td>
-                                                <td>{ingreso.ingreso.peso_total}</td>
+                                                <td>{ingreso.ingreso.peso_total.toFixed(1)}</td>
                                                 <td>{ingreso.ingreso.cliente}</td>
                                             </tr>
                                         </tbody>
