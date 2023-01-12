@@ -27,7 +27,8 @@ function Inventario() {
 
         lista.map((unidad) => {
             if (!unidad.salida_id) {
-                total += unidad.peso}
+                total += unidad.peso
+            }
         })
 
         return (total)
@@ -37,11 +38,12 @@ function Inventario() {
 
         lista.map((unidad) => {
             if (!unidad.salida_id) {
-                total += 1}
+                total += 1
+            }
         })
 
         return (total)
-    } 
+    }
 
 
 
@@ -86,8 +88,9 @@ function Inventario() {
                                                         <td>{pallet.consecutivo}</td>
                                                         <td>{pallet.cliente}</td>
                                                         <td><Button onClick={() => {
-                                                            const path = generatePath("/pallet/:id",  {id: pallet.id})
-                                                            navigate(path) }}>Ver</Button></td>
+                                                            const path = generatePath("/pallet/:id", { id: pallet.id })
+                                                            navigate(path)
+                                                        }}>Ver</Button></td>
                                                     </tr>
                                                 )
                                             }
@@ -149,7 +152,7 @@ function InventarioSimp() {
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/pallets-simplificado").then((response) => response.json()).then((data) => setIngresos(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
-    
+
     const calcularTotalPeso = (lista) => {
         let total = 0
 
@@ -168,7 +171,7 @@ function InventarioSimp() {
         })
 
         return (total)
-    } 
+    }
 
 
     if (ingresos.length > 0) {
@@ -246,18 +249,24 @@ function InventarioSimp() {
     }
 }
 
-function Pallets() {
+function Pallets(props) {
     const [modo, setModo] = useState(false)
-    return (
-        <div>
-            <input type="checkbox" onChange={() => setModo(!modo)} /> Simplificado
-            {
-                modo
-                    ? <InventarioSimp />
-                    : <Inventario />
-            }
-        </div>
-    )
+
+    if (props.tipo == "null") {
+        window.location.replace('/login')
+    }
+    else {
+        return (
+            <div>
+                <input type="checkbox" onChange={() => setModo(!modo)} /> Simplificado
+                {
+                    modo
+                        ? <InventarioSimp />
+                        : <Inventario />
+                }
+            </div>
+        )
+    }
 
 
 }

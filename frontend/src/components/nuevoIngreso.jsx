@@ -17,7 +17,7 @@ import {
   Table
 } from "react-bootstrap";
 
-function NuevoIngreso() {
+function NuevoIngreso(props) {
   const [consecutivo, setConsecutivo] = useState("")
   const [created_at, setCreated_at] = useState("")
   const [pedido, setPedido] = useState("")
@@ -82,7 +82,7 @@ function NuevoIngreso() {
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00"+(data.length+1)))
+    fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00" + (data.length + 1)))
   }, [])
 
   console.log(array)
@@ -142,197 +142,202 @@ function NuevoIngreso() {
         body: JSON.stringify(data)
       }).then((response) => response.json()).then((data) => console.log(data))
       alert("Ingreso " + consecutivo + " generado")
-      fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00"+(data.length+1)))
-      
+      fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00" + (data.length + 1)))
+
     }
 
   }
 
 
-  return (
-    <>
-      <Container fluid>
-        <Row>
-          <Col md="7">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Nuevo Ingreso</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <Form onSubmit={handleSubmit}>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>No</label>
-                        <Form.Control onChange={(e) => setConsecutivo(e.target.value)}                          
-                          type="text"
-                          disabled="true"
-                          value={consecutivo}
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <label>Fecha</label>
-                      <DatePicker selected={created_at} onChange={(date) => setCreated_at(date)} />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Pedido</label>
-                        <Form.Control onChange={(e) => setPedido(e.target.value)}
-                          value={pedido}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Placa</label>
-                        <Form.Control onChange={(e) => setPlaca(e.target.value)}
-                          value={placa}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Contenedor</label>
-                        <Form.Control onChange={(e) => setContenedor(e.target.value)}
-                          value={contenedor}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row className='my-3'>
-                    <Col>
-                      <input type="checkbox" onChange={() => setModo(!modo)} /> CSV
-                      <br></br>
-                      {modo == true &&
-                        <>
-                          <input
-                            type={"file"}
-                            id={"csvFileInput"}
-                            accept={".csv"}
-                            onChange={handleOnChange}
-                          />
+  if (props && (props.tipo == "admin" || props.tipo == "operador") ) {    
+    return (
+      <>
+        <Container fluid>
+          <Row>
+            <Col md="7">
+              <Card>
+                <Card.Header>
+                  <Card.Title as="h4">Nuevo Ingreso</Card.Title>
+                </Card.Header>
+                <Card.Body>
+                  <Form onSubmit={handleSubmit}>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>No</label>
+                          <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
+                            type="text"
+                            disabled="true"
+                            value={consecutivo}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <label>Fecha</label>
+                        <DatePicker selected={created_at} onChange={(date) => setCreated_at(date)} />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Pedido</label>
+                          <Form.Control onChange={(e) => setPedido(e.target.value)}
+                            value={pedido}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Placa</label>
+                          <Form.Control onChange={(e) => setPlaca(e.target.value)}
+                            value={placa}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Contenedor</label>
+                          <Form.Control onChange={(e) => setContenedor(e.target.value)}
+                            value={contenedor}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row className='my-3'>
+                      <Col>
+                        <input type="checkbox" onChange={() => setModo(!modo)} /> CSV
+                        <br></br>
+                        {modo == true &&
+                          <>
+                            <input
+                              type={"file"}
+                              id={"csvFileInput"}
+                              accept={".csv"}
+                              onChange={handleOnChange}
+                            />
 
-                        </>
-                      }
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Producto</label>
-                        <Form.Control onChange={(e) => setProducto(e.target.value)}
-                          value={producto}
-                          disabled={modo}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Peso Total</label>
-                        <Form.Control onChange={(e) => setPeso(e.target.value)}
-                          value={pesoT}
-                          disabled={modo}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Cantidad de Pallets</label>
-                        <Form.Control onChange={(e) => setCantidad(e.target.value)}
-                          value={cantidad}
-                          disabled={modo}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Valor Declarado</label>
-                        <Form.Control onChange={(e) => setValor(e.target.value)}
-                          value={valorT}
-                          disabled={modo}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Referencia</label>
-                        <Form.Control onChange={(e) => setReferencia(e.target.value)}
-                          value={referencia}
-                          disabled={modo}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>Proovedor</label>
-                        <Form.Control onChange={(e) => setProovedor(e.target.value)}
-                          value={proovedor}
-                          disabled={modo}
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row className='my-3'>
-                    <Dropdown isOpen={dropdown} toggle={abrir}>
-                      <DropdownToggle caret>
-                        {cliente}
-                      </DropdownToggle>
-                      <DropdownMenu>
-                        {
-                          clientes.map((cliente) =>
-                            <DropdownItem onClick={() => {
-                              setClienteID(cliente.id)
-                              setCliente(cliente.nombre)
-                            }}
-                              value={cliente.id}>{cliente.nombre}</DropdownItem>)
+                          </>
                         }
-                      </DropdownMenu>
-                    </Dropdown>
-                  </Row>
-                  <Button
-                    className="mt-4 absolute btn-fill right-3"
-                    type="submit"
-                    variant="info"
-                  >
-                    Generar
-                  </Button>
-                  <div className="clearfix"></div>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </>
-  )
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Producto</label>
+                          <Form.Control onChange={(e) => setProducto(e.target.value)}
+                            value={producto}
+                            disabled={modo}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Peso Total</label>
+                          <Form.Control onChange={(e) => setPeso(e.target.value)}
+                            value={pesoT}
+                            disabled={modo}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Cantidad de Pallets</label>
+                          <Form.Control onChange={(e) => setCantidad(e.target.value)}
+                            value={cantidad}
+                            disabled={modo}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Valor Declarado</label>
+                          <Form.Control onChange={(e) => setValor(e.target.value)}
+                            value={valorT}
+                            disabled={modo}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Referencia</label>
+                          <Form.Control onChange={(e) => setReferencia(e.target.value)}
+                            value={referencia}
+                            disabled={modo}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>Proovedor</label>
+                          <Form.Control onChange={(e) => setProovedor(e.target.value)}
+                            value={proovedor}
+                            disabled={modo}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row className='my-3'>
+                      <Dropdown isOpen={dropdown} toggle={abrir}>
+                        <DropdownToggle caret>
+                          {cliente}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          {
+                            clientes.map((cliente) =>
+                              <DropdownItem onClick={() => {
+                                setClienteID(cliente.id)
+                                setCliente(cliente.nombre)
+                              }}
+                                value={cliente.id}>{cliente.nombre}</DropdownItem>)
+                          }
+                        </DropdownMenu>
+                      </Dropdown>
+                    </Row>
+                    <Button
+                      className="mt-4 absolute btn-fill right-3"
+                      type="submit"
+                      variant="info"
+                    >
+                      Generar
+                    </Button>
+                    <div className="clearfix"></div>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </>
+    )
+  }
+  else {
+    window.location.replace('/login')
+  }
 }
 
 export default NuevoIngreso

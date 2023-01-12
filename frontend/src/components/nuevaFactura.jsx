@@ -16,7 +16,7 @@ import {
 
 import "react-datepicker/dist/react-datepicker.css";
 
-function NuevaFactura() {
+function NuevaFactura(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [clientes, setClientes] = useState([])
@@ -35,7 +35,7 @@ function NuevaFactura() {
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/facturas").then((response) => response.json()).then((data) => setConsecutivo("F-000"+(data.length+1)))
+    fetch("http://localhost:5000/api/v1/facturas").then((response) => response.json()).then((data) => setConsecutivo("F-000" + (data.length + 1)))
   }, [])
 
   const handleSubmit = (e) => {
@@ -64,73 +64,78 @@ function NuevaFactura() {
     alert("Factura " + consecutivo + " generada")
   }
 
-  return (
-    <>
-      <Container fluid>
-        <Row>
-          <Col md="8">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Nueva Factura</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <Form onSubmit={handleSubmit}>
-                  <Row>
-                    <Col className='pr-1' md="6">
-                      <Form.Group>
-                        <label>No</label>
-                        <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
-                          value={consecutivo}
-                          type="text"
-                          disabled="true"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                    <Col className='mt-4'>
-                      <Dropdown isOpen={dropdown} toggle={abrir}>
-                        <DropdownToggle caret>
-                          {cliente}
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          {
-                            clientes.map((cliente) =>
-                              <DropdownItem onClick={() => {
-                                setClienteID(cliente.id)
-                                setCliente(cliente.nombre)
-                              }}
-                                value={cliente.id}>{cliente.nombre}</DropdownItem>)
-                          }
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
-                  </Row>
-                  <Row className='mt-3'>
-                    <Col>
-                      <label>Fecha Inicial</label>
-                      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                    </Col>
-                    <Col>
-                      <label>Fecha Final</label>
-                      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-                    </Col>
-                  </Row>
-                  <Button
-                    className="mt-4 absolute btn-fill right-3"
-                    type="submit"
-                    variant="info"
-                  >
-                    Generar
-                  </Button>
-                  <div className="clearfix"></div>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-      
-    </>
-  );
+  if (props && (props.tipo == "admin" || props.tipo == "operador")) {
+    return (
+      <>
+        <Container fluid>
+          <Row>
+            <Col md="8">
+              <Card>
+                <Card.Header>
+                  <Card.Title as="h4">Nueva Factura</Card.Title>
+                </Card.Header>
+                <Card.Body>
+                  <Form onSubmit={handleSubmit}>
+                    <Row>
+                      <Col className='pr-1' md="6">
+                        <Form.Group>
+                          <label>No</label>
+                          <Form.Control onChange={(e) => setConsecutivo(e.target.value)}
+                            value={consecutivo}
+                            type="text"
+                            disabled="true"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col className='mt-4'>
+                        <Dropdown isOpen={dropdown} toggle={abrir}>
+                          <DropdownToggle caret>
+                            {cliente}
+                          </DropdownToggle>
+                          <DropdownMenu>
+                            {
+                              clientes.map((cliente) =>
+                                <DropdownItem onClick={() => {
+                                  setClienteID(cliente.id)
+                                  setCliente(cliente.nombre)
+                                }}
+                                  value={cliente.id}>{cliente.nombre}</DropdownItem>)
+                            }
+                          </DropdownMenu>
+                        </Dropdown>
+                      </Col>
+                    </Row>
+                    <Row className='mt-3'>
+                      <Col>
+                        <label>Fecha Inicial</label>
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                      </Col>
+                      <Col>
+                        <label>Fecha Final</label>
+                        <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+                      </Col>
+                    </Row>
+                    <Button
+                      className="mt-4 absolute btn-fill right-3"
+                      type="submit"
+                      variant="info"
+                    >
+                      Generar
+                    </Button>
+                    <div className="clearfix"></div>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+
+      </>
+    );
+  }
+  else {
+    window.location.replace('/login')
+  }
 }
 
 export default NuevaFactura
