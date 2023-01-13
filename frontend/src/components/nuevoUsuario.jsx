@@ -48,7 +48,7 @@ function NuevoUsuario(props) {
 
     console.log(props.tipo)
 
-    if (props.tipo == "admin") {
+    if (props.tipo) {
         return (
             <>
                 <Container fluid>
