@@ -23,7 +23,7 @@ function Login() {
         (async () => {
 
             try {
-                const resp = await httpClient.get("http://localhost:5000/api/v1/@me")
+                const resp = await httpClient.get("/api/v1/@me")
                 setTipo(resp.data.tipo)
             } catch (error) {
                 setTipo("null")
@@ -35,7 +35,7 @@ function Login() {
     const logout = async (e) => {
         e.preventDefault();
 
-        const res = await fetch('http://localhost:5000/api/v1/logout', {
+        const res = await fetch('/api/v1/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ function Login() {
             credentials: 'include'
         }) */
 
-        const resp = await httpClient.post('http://localhost:5000/api/v1/login', data)
+        const resp = await httpClient.post('/api/v1/login', data)
 
         console.log(resp)
 

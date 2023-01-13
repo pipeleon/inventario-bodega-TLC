@@ -11,7 +11,7 @@ function Nav2() {
         (async () => {
 
             try {
-                const resp = await httpClient.get("http://localhost:5000/api/v1/@me")
+                const resp = await httpClient.get("/api/v1/@me")
                 setTipo(resp.data.tipo)
                 console.log(tipo)
             } catch (error) {

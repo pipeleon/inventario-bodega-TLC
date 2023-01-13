@@ -9,7 +9,7 @@ function Home() {
         (async () => {
 
             try {
-                const resp = await httpClient.get("http://localhost:5000/api/v1/@me")
+                const resp = await httpClient.get("/api/v1/@me")
                 setTipo(resp.data.tipo)
                 setName(resp.data.nombre)
             } catch (error) {
