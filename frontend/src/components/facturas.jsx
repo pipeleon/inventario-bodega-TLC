@@ -20,7 +20,7 @@ function Facturas(props) {
     let navigate = useNavigate()
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/facturas").then((response) => response.json()).then((data) => setFacturas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
+        fetch("/api/v1/facturas").then((response) => response.json()).then((data) => setFacturas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
 

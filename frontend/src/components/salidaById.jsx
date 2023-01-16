@@ -20,7 +20,7 @@ function SalidaById() {
     const [salida, setSalida] = useState()
 
     useEffect(() => {
-        const path1 = "http://localhost:5000"
+        const path1 = ""
         const path2 = generatePath("/api/v1/salida/:id", { id: id })
         const path = path1 + path2
         fetch(path).then((response) => response.json()).then((data) => setSalida(data))

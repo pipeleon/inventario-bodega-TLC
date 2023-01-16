@@ -78,11 +78,11 @@ function NuevoIngreso(props) {
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
+    fetch("/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00" + (data.length + 1)))
+    fetch("/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00" + (data.length + 1)))
   }, [])
 
   console.log(array)
@@ -134,7 +134,7 @@ function NuevoIngreso(props) {
       }
 
 
-      fetch('http://localhost:5000/api/v1/ingresos', {
+      fetch('/api/v1/ingresos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ function NuevoIngreso(props) {
         body: JSON.stringify(data)
       }).then((response) => response.json()).then((data) => console.log(data))
       alert("Ingreso " + consecutivo + " generado")
-      fetch("http://localhost:5000/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00" + (data.length + 1)))
+      fetch("/api/v1/ingresos").then((response) => response.json()).then((data) => setConsecutivo("C-00" + (data.length + 1)))
 
     }
 

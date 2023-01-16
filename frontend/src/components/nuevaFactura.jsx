@@ -31,11 +31,11 @@ function NuevaFactura(props) {
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
+    fetch("/api/v1/clientes").then((response) => response.json()).then((data) => setClientes(data))
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/facturas").then((response) => response.json()).then((data) => setConsecutivo("F-000" + (data.length + 1)))
+    fetch("/api/v1/facturas").then((response) => response.json()).then((data) => setConsecutivo("F-000" + (data.length + 1)))
   }, [])
 
   const handleSubmit = (e) => {

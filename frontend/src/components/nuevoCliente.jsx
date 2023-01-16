@@ -35,7 +35,7 @@ function NuevoCliente(props) {
 
     console.log(data)
 
-    fetch('http://localhost:5000/api/v1/clientes', {
+    fetch('/api/v1/clientes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

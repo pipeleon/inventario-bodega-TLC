@@ -28,11 +28,11 @@ function NuevaSalida(props) {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
+        fetch("/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setConsecutivo("D-00" + (data.length + 1)))
+        fetch("/api/v1/salidas").then((response) => response.json()).then((data) => setConsecutivo("D-00" + (data.length + 1)))
     }, [])
 
     const handleChange = (id) => {
@@ -53,7 +53,7 @@ function NuevaSalida(props) {
             'pallets': pallets_salida
         }
 
-        fetch('http://localhost:5000/api/v1/salidas', {
+        fetch('/api/v1/salidas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

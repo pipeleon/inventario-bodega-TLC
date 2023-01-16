@@ -19,7 +19,7 @@ function Inventario() {
     let navigate = useNavigate()
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
+        fetch("/api/v1/pallets").then((response) => response.json()).then((data) => setPallets(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
     const calcularTotal = (lista) => {
@@ -150,7 +150,7 @@ function InventarioSimp() {
     const [ingresos, setIngresos] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/pallets-simplificado").then((response) => response.json()).then((data) => setIngresos(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
+        fetch("/api/v1/pallets-simplificado").then((response) => response.json()).then((data) => setIngresos(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
     const calcularTotalPeso = (lista) => {

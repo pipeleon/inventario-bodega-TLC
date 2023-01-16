@@ -135,7 +135,8 @@ function Login() {
         )
     }
     else {
-        window.location.replace('/')
+        console.log(tipo)
+        /* window.location.replace('/') */
     }
 }
 

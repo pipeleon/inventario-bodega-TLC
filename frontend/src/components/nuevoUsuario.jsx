@@ -36,7 +36,7 @@ function NuevoUsuario(props) {
         }
 
 
-        fetch('http://localhost:5000/api/v1/usuario', {
+        fetch('/api/v1/usuario', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ function NuevoUsuario(props) {
 
     console.log(props.tipo)
 
-    if (props.tipo) {
+    if (props.tipo == "admin") {
         return (
             <>
                 <Container fluid>

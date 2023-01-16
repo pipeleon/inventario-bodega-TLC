@@ -23,7 +23,7 @@ function PalletById() {
     const [observaciones, setObservaciones] = useState([])
 
     useEffect(() => {
-        const path1 = "http://localhost:5000"
+        const path1 = ""
         const path2 = generatePath("/api/v1/pallet/:id", { id: id })
         const path3 = generatePath("/api/v1/observaciones/:id", { id: id })
         const path = path1 + path2
@@ -39,7 +39,7 @@ function PalletById() {
             'pallet_id': id
         }
 
-        fetch('http://localhost:5000/api/v1/observaciones', {
+        fetch('/api/v1/observaciones', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ function PalletById() {
             body: JSON.stringify(data)
         }).then((response) => response.json()).then((data) => console.log(data))
         alert("Observacion creada")
-        const path1 = "http://localhost:5000"
+        const path1 = ""
         const path3 = generatePath("/api/v1/observaciones/:id", { id: id })
         fetch(path1 + path3).then((response) => response.json()).then((data) => setObservaciones(data))
     }

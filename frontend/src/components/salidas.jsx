@@ -18,7 +18,7 @@ function Salidas(props) {
     let navigate = useNavigate()
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/salidas").then((response) => response.json()).then((data) => setSalidas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
+        fetch("/api/v1/salidas").then((response) => response.json()).then((data) => setSalidas(data.sort((a, b) => a.consecutivo > b.consecutivo ? 1 : -1)))
     }, [])
 
     const calcularTotalPeso = (lista) => {
