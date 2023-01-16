@@ -252,10 +252,10 @@ function InventarioSimp() {
 function Pallets(props) {
     const [modo, setModo] = useState(false)
 
-    if (props.tipo == "null") {
+    /* if (props.tipo == "null") {
         window.location.replace('/login')
     }
-    else {
+    else { */
         return (
             <div>
                 <input type="checkbox" onChange={() => setModo(!modo)} /> Simplificado
@@ -266,7 +266,7 @@ function Pallets(props) {
                 }
             </div>
         )
-    }
+    
 
 
 }

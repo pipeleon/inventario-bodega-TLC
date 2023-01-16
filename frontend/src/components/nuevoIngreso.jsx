@@ -149,7 +149,7 @@ function NuevoIngreso(props) {
   }
 
 
-  if (props && (props.tipo == "admin" || props.tipo == "operador") ) {    
+  /* if (props && (props.tipo == "admin" || props.tipo == "operador") ) {     */
     return (
       <>
         <Container fluid>
@@ -334,10 +334,10 @@ function NuevoIngreso(props) {
         </Container>
       </>
     )
-  }
+  /* }
   else {
     window.location.replace('/login')
-  }
+  } */
 }
 
 export default NuevoIngreso
