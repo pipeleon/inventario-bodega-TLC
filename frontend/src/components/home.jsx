@@ -25,7 +25,8 @@ function Home() {
         return <h1>Cargando</h1>
     }
     else if (tipo == "null") {
-        window.location.replace('/login')
+        console.log(tipo)
+        /* window.location.replace('/login') */
     }
     else {
         return <h1>Bienvenido {name}</h1>

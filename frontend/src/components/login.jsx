@@ -75,7 +75,8 @@ function Login() {
         console.log(resp.status)
 
         if (resp.status == 201) {
-            window.location.href = "/";
+            console.log(resp)
+            /* window.location.href = "/"; */
             /* const res = await fetch("http://localhost:5000/api/v1/@me", { credentials: 'include' })
             console.log(res) */
         }
