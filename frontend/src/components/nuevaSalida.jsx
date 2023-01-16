@@ -64,7 +64,7 @@ function NuevaSalida(props) {
     }
 
 
-    if (props && (props.tipo == "admin" || props.tipo == "operador")) {
+    /* if (props && (props.tipo == "admin" || props.tipo == "operador")) { */
         if (pallets.length > 0) {
             return (
                 <>
@@ -208,10 +208,10 @@ function NuevaSalida(props) {
                 </div>
             )
         }
-    }
+    /* }
     else {
         window.location.replace('/login')
-    }
+    } */
 }
 
 export default NuevaSalida

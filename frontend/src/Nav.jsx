@@ -54,25 +54,24 @@ function Nav2() {
                             Facturas
                         </Link>
                     </li>
-                    {(tipo == "admin" || tipo == "operador") &&
-                        <>
-                            <li>
-                                <Link to="/nuevo-ingreso" className="nav-link">
-                                    Nuevo Ingreso
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/nueva-salida" className="nav-link">
-                                    Nueva Salida
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/nueva-factura" className="nav-link">
-                                    Nueva Factura
-                                </Link>
-                            </li>
-                        </>
-                    }
+                    {/* {(tipo == "admin" || tipo == "operador") &&
+                        <> */}
+                    <li>
+                        <Link to="/nuevo-ingreso" className="nav-link">
+                            Nuevo Ingreso
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/nueva-salida" className="nav-link">
+                            Nueva Salida
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/nueva-factura" className="nav-link">
+                            Nueva Factura
+                        </Link>
+                    </li>
+
                     {tipo == "admin" &&
                         <li>
                             <Link to="/nuevo-cliente" className="nav-link">

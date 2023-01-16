@@ -21,16 +21,16 @@ function Home() {
     }, [])
 
 
-    if (tipo == "") {
+   /*  if (tipo == "") {
         return <h1>Cargando</h1>
     }
     else if (tipo == "null") {
-        console.log(tipo)
-        /* window.location.replace('/login') */
+        console.log(first)
+        window.location.replace('/login')
     }
-    else {
+    else { */
         return <h1>Bienvenido {name}</h1>
-    }
+    
 }
 
 export default Home

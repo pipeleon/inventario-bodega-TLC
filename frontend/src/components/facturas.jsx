@@ -25,10 +25,10 @@ function Facturas(props) {
 
 
 
-    if (props.tipo == "null") {
+    /* if (props.tipo == "null") {
         window.location.replace('/login')
     }
-    else {
+    else { */
         if (facturas.length > 0) {
             return (
                 <>
@@ -105,7 +105,7 @@ function Facturas(props) {
                 </>
             )
         }
-    }
+    
 }
 
 export default Facturas

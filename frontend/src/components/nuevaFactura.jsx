@@ -64,7 +64,7 @@ function NuevaFactura(props) {
     alert("Factura " + consecutivo + " generada")
   }
 
-  if (props && (props.tipo == "admin" || props.tipo == "operador")) {
+  /* if (props && (props.tipo == "admin" || props.tipo == "operador")) { */
     return (
       <>
         <Container fluid>
@@ -132,10 +132,10 @@ function NuevaFactura(props) {
 
       </>
     );
-  }
+ /*  }
   else {
     window.location.replace('/login')
-  }
+  } */
 }
 
 export default NuevaFactura

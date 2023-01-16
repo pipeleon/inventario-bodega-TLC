@@ -41,10 +41,10 @@ function Salidas(props) {
         return (total)
     }
 
-    if (props.tipo == "null") {
+    /* if (props.tipo == "null") {
         window.location.replace('/login')
     }
-    else {
+    else { */
         if (salidas.length > 0) {
             return (
                 <>
@@ -126,7 +126,7 @@ function Salidas(props) {
                 </>
             )
         }
-    }
+    
 
 
 }

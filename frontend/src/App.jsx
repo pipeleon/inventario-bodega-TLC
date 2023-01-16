@@ -40,7 +40,7 @@ function App() {
     (async () => {
 
       try {
-        const resp = await httpClient.get("/api/v1/@me")
+        const resp = await httpClient.get("http://localhost:5000/api/v1/@me")
         setName(resp.data)
       } catch (error) {
         setName({tipo: "null"})
@@ -52,7 +52,7 @@ function App() {
   const logout = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('/api/v1/logout', {
+    const res = await fetch('http://localhost:5000/api/v1/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

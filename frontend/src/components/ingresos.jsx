@@ -42,10 +42,10 @@ function Ingresos(props) {
         return (total)
     }
 
-    if (props.tipo == "null") {
+    /* if (props.tipo == "null") {
         window.location.replace('/login')
     }
-    else {
+    else { */
         if (ingresos.length > 0) {
             return (
                 <>
@@ -132,7 +132,7 @@ function Ingresos(props) {
                 </>
             )
         }
-    }
+    
 
 
 }
