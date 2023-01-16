@@ -54,7 +54,7 @@ function NuevaFactura(props) {
     console.log(endDate)
 
 
-    fetch('http://localhost:5000/api/v1/facturas', {
+    fetch('/api/v1/facturas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
