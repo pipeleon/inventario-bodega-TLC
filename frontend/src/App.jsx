@@ -67,7 +67,7 @@ function App() {
 
   return (
     <div className="App">
-      {name.tipo != "null" &&
+      {name.tipo &&
         <>
           <Row>
             <Col md="2">
