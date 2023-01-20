@@ -9,6 +9,9 @@ import bcrypt
 
 @app_views.route("/@me")
 def get_current_user():
+    print(request.cookies)
+    print(request.headers)
+    print(request)
     user_id = session.get("user_id")
 
     print(user_id)
@@ -55,6 +58,9 @@ def login_usuario():
     """
     Nuevo Usuario 
     """
+    print(request.cookies)
+    print(request.headers)
+    print(request)
 
     if not request.get_json():
         abort(400, description="Not a JSON")

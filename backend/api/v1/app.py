@@ -12,12 +12,12 @@ from flask_session import Session
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
-cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 app.config["SECRET_KEY"] = "mysecret"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_COOKIE_SAMESITE"] = "None"
-app.config["SESSION_COOKIE_SECURE"] = True
+""" app.config["SESSION_COOKIE_SECURE"] = True """
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 Session(app)
 
 
